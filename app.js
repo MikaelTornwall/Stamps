@@ -7,7 +7,11 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 var commonRoute = require("./routes/commonRoutes");
+var companyRoute = require("./routes/companyRoutes");
+var customerRoute = require("./routes/customerRoutes");
 app.use(commonRoute);
+app.use(companyRoute);
+app.use(customerRoute);
 
 app.get("/*", function(req,res) {
 	res.render("index");
