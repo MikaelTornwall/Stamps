@@ -10,8 +10,8 @@ var commonRoute = require("./routes/commonRoutes");
 var companyRoute = require("./routes/companyRoutes");
 var customerRoute = require("./routes/customerRoutes");
 app.use(commonRoute);
-app.use(companyRoute);
-app.use(customerRoute);
+app.use("/companies", companyRoute);
+app.use("/customers", customerRoute);
 
 app.get("/*", function(req,res) {
 	res.render("index");

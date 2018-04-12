@@ -5,12 +5,16 @@ var router = express.Router();
 //BASIC ROUTES 
 //========================================================
 
-router.get("/companies", function(req,res){
+router.get("/", function(req,res){
 	res.render("company/index");
 });
 
-router.get("/companies/:id", function(req,res){
+router.get("/:id", function(req,res){
 	res.render("company/profile", {id:req.params.id});
+});
+
+router.get("/:id/admin", function(req,res){
+	res.render("company/admin", {id:req.params.id});
 });
 
 

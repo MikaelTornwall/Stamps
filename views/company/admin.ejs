@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+<h2>Stamp requests</h2>
+<ol>
+<li>#circularMay | Card number: 2 | <button>Grant</button> | <button>Deny</button></li>
+<li>#now2 | Card number: 3 | <button>Grant</button> | <button>Deny</button></li>
+</ol>
+<br>
+
+<h2>Redeem requests</h2>
+<ol>
+<li>#circularMay | Card number: 1 | <button>Redeem</button></li>
+</ol>
+<br>
+
+<h2>New campaign</h2>
+<form action="/campaigns" id="newcampaign">
+	<div class="form-group">
+		<label for="img">Image</label>
+		<input type="text" class="form-control" name="img" placeholder="insert image url">
+	</div>
+	<div class="form-group">
+		<label for="desc">Desciption</label>
+		<textarea rows="3" cols="50" name="comment" name="desc" form="newcampaign" placeholder="Describe your campaign"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="rew">Reward</label>
+		<input type="text" class="form-control" name="rew" placeholder="What is the reward for the campaign?">
+	</div>
+	<input type="submit" class="btn btn-primary" value="Deploy">
+</form>
+
+<br>
+
+<% include ../partials/footer %>

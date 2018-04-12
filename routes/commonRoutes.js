@@ -25,10 +25,6 @@ router.get("/rewards/:id", function(req,res){
 	res.render("common/reward", {id:req.params.id});
 });
 
-router.get("/register", function(req,res){
-	res.render("common/register");
-});
-
 router.get("/login", function(req,res){
 	res.render("common/login");
 });

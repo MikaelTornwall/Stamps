@@ -1,6 +1,38 @@
 <% include ../partials/header %>
 
 <br>
-<a href="/customers/mypage">Form: sign in</a>
+<br>
+
+<p>customer login</p>
+<form action="/customers/username/cards/latestcard" >
+	<div class="form-group">
+		<label for="username">Username</label>
+		<input type="text" class="form-control" name="username" placeholder="username">
+	</div>
+	<div class="form-group">
+		<label for="password">Password</label>
+		<input type="text" class="form-control" name="password" placeholder="password">
+	</div>
+	<input type="submit" class="btn btn-primary" value="Log in">
+	<input type="submit" class="btn btn-primary" value="Sign up">
+</form>
+
+<br>
+<br>
+
+<p>company login</p>
+<form action="/companies/nordicoceanwatch/admin" >
+	<div class="form-group">
+		<label for="username">Username</label>
+		<input type="text" class="form-control" name="username" placeholder="username">
+	</div>
+	<div class="form-group">
+		<label for="password">Password</label>
+		<input type="text" class="form-control" name="password" placeholder="password">
+	</div>
+	<input type="submit" class="btn btn-primary" value="Log In">
+	<input type="submit" class="btn btn-primary" value="Sign up">
+</form>
+
 
 <% include ../partials/footer %>
