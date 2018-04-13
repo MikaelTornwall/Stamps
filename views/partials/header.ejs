@@ -6,5 +6,14 @@
 <a href="/campaigns">campaigns</a> | 
 <a href="/companies">companies</a> | 
 <a href="/rewards">rewards</a> | 
-<a href="/login">login</a>
+
+<%if(!currentUser) {%>
+<a href="/login">login</a> | 
+<a href="/register">sign up</a>
+<% } %>
+
+<%if(currentUser) {%>
+ <a href="/logout">logout</a>
+<% } %>
+
 <br>

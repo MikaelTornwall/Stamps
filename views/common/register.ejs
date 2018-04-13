@@ -3,8 +3,8 @@
 <br>
 <br>
 
-<p>customer login</p>
-<form action="/login/customer" method="post">
+<p>customer sign up</p>
+<form action="/register/customer" method="post">
 	<div class="form-group">
 		<label for="username">Username</label>
 		<input type="text" class="form-control" name="username" placeholder="username">
@@ -13,14 +13,19 @@
 		<label for="password">Password</label>
 		<input type="text" class="form-control" name="password" placeholder="password">
 	</div>
-	<input type="submit" class="btn btn-primary" value="Log in">
+	
+	<input type="submit" class="btn btn-primary" value="Sign up">
 </form>
 
 <br>
 <br>
 
-<p>company login</p>
-<form action="/login/company" method="post">
+<p>company sign up</p>
+<form action="/register/company" method="post">
+	<div class="form-group">
+		<label for="image">Image URL</label>
+		<input type="text" class="form-control" name="image" placeholder="https://pbs.twimg.com/profile_images/844080964196319233/DbhESg8S_400x400.jpg">
+	</div>
 	<div class="form-group">
 		<label for="username">Username</label>
 		<input type="text" class="form-control" name="username" placeholder="username">
@@ -29,7 +34,8 @@
 		<label for="password">Password</label>
 		<input type="text" class="form-control" name="password" placeholder="password">
 	</div>
-	<input type="submit" class="btn btn-primary" value="Log In">
+	<input type="submit" class="btn btn-primary" value="Sign up">
 </form>
+
 
 <% include ../partials/footer %>
