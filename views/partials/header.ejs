@@ -10,10 +10,11 @@
 <%if(!currentUser) {%>
 <a href="/login">login</a> | 
 <a href="/register">sign up</a>
+<% } else if(currentUser.role) { %>
+<a href="/customers/USERNAME/cards">profile</a> | 
+<a href="/logout">logout</a>
+<% } else { %>
+<a href="/companies/COMPANYNAME/admin">admin</a> | 
+<a href="/logout">logout</a>
 <% } %>
-
-<%if(currentUser) {%>
- <a href="/logout">logout</a>
-<% } %>
-
 <br>

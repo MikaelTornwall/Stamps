@@ -1,8 +1,15 @@
 <% include ../partials/header %>
 
-<h1><%= id %></h1>
-<a href="/rewards/coffee"><img src="https://pbs.twimg.com/profile_images/844080964196319233/DbhESg8S_400x400.jpg"></a>
-<p><a href="/companies/nordicoceanwatch">NOW<a/> | #circularMay | Start: May 1st | End: May 31st | <% include ../partials/request %>
-
+<h1><%= campaign.title %></h1>
+<img src="<%= campaign.image %>" width="200px" height="200px">
+<form action="/campaigns/<%= campaign.id %>" id="get_card_form" method="POST"></form>
+<p>
+Description: <%= campaign.description %> | 
+Start: <%= campaign.start_time %> | 
+End: <%= campaign.end_time %> | 
+Reward: <%= campaign.reward %> |
+Stamps needed: <%= campaign.stamps_needed %> | 
+<input type="submit" class="btn btn-primary" form="get_card_form" value="Get Card">
+</p>
 
 <% include ../partials/footer %>

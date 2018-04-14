@@ -1,4 +1,5 @@
 var bodyParser = 			require("body-parser"),
+	methodOverride = 		require("method-override"),
 	mongoose = 				require("mongoose"),
 	passport = 				require("passport"),
 	LocalStrategy = 		require("passport-local"),
@@ -17,6 +18,7 @@ app.use(passport.session());
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 var url = process.env.DATABASEURL || "mongodb://localhost/stamps";
 mongoose.connect(url);
@@ -38,12 +40,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// passport.use(new LocalStrategy(Company.authenticate()));
-// passport.serializeUser(Company.serializeUser());
-// passport.deserializeUser(Company.deserializeUser());
-
 app.get("/*", function(req,res) {
-	res.render("index");
+	res.render("common/index");
 });
 
 app.listen(process.env.PORT || 3000, function() {

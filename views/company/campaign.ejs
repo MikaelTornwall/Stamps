@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+<%= user %>
+<br>
+<%= id %>
+<br>
+<%= campaign.requests %>
+<br>
+
+<h2>Stamp requests</h2>
+
+<ol>
+<% for(var i = 0; i < campaign.requests.length; i++) { %>
+<li>
+<form method="POST" id="grant_stamp<%=i%>" action="/companies/<%= user._id %>/admin/campaigns/<%= campaign._id %>/stamps/<%= campaign.requests[i]._id %>/?_method=PUT"></form>
+
+#
+<%= campaign.title %> | 
+<%= campaign.requests[i].username %> | 
+<input type="submit" form="grant_stamp<%=i%>" value="Grant"> | 
+
+<button>Deny</button></li>
+<% } %>
+</ol>
+<br>
+
+
+<h2>Redeem requests</h2>
+
+<ol>
+<li>PLACEHOLDER#circularMay | Card number: 1 | <button>Redeem</button></li>
+</ol>
+<br>
+
+
+<% include ../partials/footer %>
+
+

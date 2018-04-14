@@ -1,29 +1,21 @@
 <% include ../partials/header %>
 
-<ul>All rewards:
+<h1>All rewards list:</h1>
+<ul>
+
+<% for(var i = 0; i < rewards.length; i++) { %>
 	<li>
-		<img src="https://rlv.zcache.com.au/refill_please_coffee_mug-re2bafd0c472f43d486cbd1b64f733348_x7jgr_8byvr_540.jpg" height="50" width="50">
-		<br>
-		<p>coffee refill for reusing coffee cups<p>
-		<br>
-		<% include ../partials/request %> | <a href="/rewards/coffee">view</a>
-	</li>
+	<p>Title: <%= rewards[i].title %></p>
 	<br>
-	<li>
-		<img src="https://rlv.zcache.com.au/refill_please_coffee_mug-re2bafd0c472f43d486cbd1b64f733348_x7jgr_8byvr_540.jpg" height="50" width="50">
-		<br>
-		<p>coffee refill for reusing coffee cups<p>
-		<br>
-		<% include ../partials/request %> | <a href="/rewards/coffee">view</a>
-	</li>
+	<img src="<%= rewards[i].image %>"" height="50" width="50">
 	<br>
-	<li>
-		<img src="https://rlv.zcache.com.au/refill_please_coffee_mug-re2bafd0c472f43d486cbd1b64f733348_x7jgr_8byvr_540.jpg" height="50" width="50">
-		<br>
-		<p>coffee refill for reusing coffee cups<p>
-		<br>
-		<% include ../partials/request %> | <a href="/rewards/coffee">view</a>
+	<p><%= rewards[i].description %></p>
+	<br>
+	<p><%= rewards[i].company.name %></p>
+	<br>
+	<% include ../partials/request %> | <a href="/rewards/<%= rewards[i].id %>">view</a>
 	</li>
+<% } %>
 	<br>
 </ul>
 

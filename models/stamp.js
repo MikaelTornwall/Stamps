@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 
 var stampSchema = new mongoose.Schema({
+	id: Number,
 	card: 
 		{
 			id: {

@@ -1,48 +1,17 @@
 <% include ../partials/header %>
 
-<ul>All companies list: 
-	<li>
-		<img src="https://pbs.twimg.com/profile_images/844080964196319233/DbhESg8S_400x400.jpg" width="50px" height="50px">
-		<br>
-		<a href="/companies/nordicoceanwatch">NOW<a/>
-		<ul>campaigns
-			<li><a href="/campaigns/circularmay">#circularMay</a></li>
-			<li><a href="/campaigns/now2">nowcampaign2</a></li>
-			<li><a href="/campaigns/now3">nowcampaign3</a></li>
-		</ul>
-	</li>
-
-	<br>
-	<br>
-
-	<li>
-		<img src="https://pbs.twimg.com/profile_images/3383114285/4a78a47c94d860b78532e4eaf913e907_400x400.png" width="50px" height="50px">
-		<br>
-		<a href="/companies/unicafe">Unicafe<a/>
-		<ul>campaigns
-			<li><a href="/campaigns/circularmay">#circularMay</a></li>
-		</ul>
-	</li>
-
-	<br>
-	<br>
-	
+<h1>All companies list:</h1>
+<ul>
 <% for(var i = 0; i < companies.length; i++) { %>
 	<li>
 		<img src="<%= companies[i].image %>" width="50px" height="50px">
 		<br>
-		<a href="/companies/<%= companies[i].username %>"><%= companies[i].username %><a/>
+		<a href="/companies/<%= companies[i].id %>"><%= companies[i].username %><a/>
 		<br>
-		<p>campaigns</p>
-		<br>
-<% for(var j = 0; j < companies[i].campaigns.length; j++) { %>
-		<a href="/campaigns/<%= companies[i].campaigns[j] %>"><%= companies[i].campaigns[j].title %><a/>
-<% } %>
 	</li>
 	<br>
 	<br>
 <% } %>
-
-
 </ul>
+
 <% include ../partials/footer %>

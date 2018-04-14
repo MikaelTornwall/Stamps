@@ -1,48 +1,95 @@
 <% include ../partials/header %>
+<%= user %>
+<br>
+<%= id %>
+<br>
+<%= campaigns %>
+<br>
+<h2>Campaigns</h2>
+<ul>
+<% for(var i = 0; i < campaigns.length; i++) { %>
+<li><a href="/companies/<%= id %>/admin/campaigns/<%= campaigns[i]._id %>"><%= campaigns[i].title %></a></li>
+<% } %>
+</ul>
 
+
+<!--
 <h2>Stamp requests</h2>
+
+
+
+PLACEHOLDER
 <ol>
 <li>#circularMay | Card number: 2 | <button>Grant</button> | <button>Deny</button></li>
 <li>#now2 | Card number: 3 | <button>Grant</button> | <button>Deny</button></li>
 </ol>
 <br>
 
+
 <h2>Redeem requests</h2>
+PLACEHOLDER
 <ol>
 <li>#circularMay | Card number: 1 | <button>Redeem</button></li>
 </ol>
 <br>
+-->
 
 <h2>New campaign</h2>
-<form action="/campaigns" id="newcampaign">
+FUNCTIONAL
+<form action="/campaigns" id="newcampaign"  method="POST">
 	<div class="form-group">
-		<label for="img">Image</label>
-		<input type="text" class="form-control" name="img" placeholder="insert image url">
+		<label for="title">Title</label>
+		<input type="text" class="form-control" name="title" placeholder="insert title">
 	</div>
 	<div class="form-group">
-		<label for="desc">Desciption</label>
-		<textarea rows="3" cols="50" name="comment" name="desc" form="newcampaign" placeholder="Describe your campaign"></textarea>
+		<label for="image">Image</label>
+		<input type="text" class="form-control" name="image" placeholder="insert image url">
 	</div>
 	<div class="form-group">
-		<label for="rew">Reward</label>
-		<input type="text" class="form-control" name="rew" placeholder="What is the reward for the campaign?">
+		<label for="description">Desciption</label>
+		<textarea rows="3" cols="50" name="comment" name="description" form="newcampaign" placeholder="Describe your campaign"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="reward">Reward</label>
+		<input type="text" class="form-control" name="reward" placeholder="Reward for campaign">
+	</div>
+	<div class="form-group">
+		<label for="stamps">Stamps needed</label>
+		<input type="number" class="form-control" name="stamps" placeholder="How many needed">
+	</div>
+	<div class="form-group">
+		<label for="start">Starting date</label>
+		<input type="date" class="form-control" name="start" placeholder="Enter starting date">
+	</div>
+	<div class="form-group">
+		<label for="end">Ending date</label>
+		<input type="date" class="form-control" name="end" placeholder="Enter ending date">
 	</div>
 	<input type="submit" class="btn btn-primary" value="Deploy">
 </form>
 <br>
 
+
 <h2>New reward</h2>
-<form action="/campaigns" id="newcampaign">
+FUNCTIONAL
+<form action="/rewards" id="newreward" method="POST">
 	<div class="form-group">
-		<label for="img">Image</label>
-		<input type="text" class="form-control" name="img" placeholder="insert image url">
+		<label for="title">Title</label>
+		<input type="text" class="form-control" name="title" placeholder="Title">
 	</div>
 	<div class="form-group">
-		<label for="desc">Desciption</label>
-		<textarea rows="3" cols="50" name="comment" name="desc" form="newcampaign" placeholder="Describe your campaign"></textarea>
+		<label for="image">Image</label>
+		<input type="text" class="form-control" name="image" placeholder="insert image url">
+	</div>
+	<div class="form-group">
+		<label for="description">Desciption</label>
+		<textarea rows="3" cols="50" name="comment" name="description" form="newreward" placeholder="Describe your reward"></textarea>
 	</div>
 	<input type="submit" class="btn btn-primary" value="Create">
 </form>
 <br>
 
+
 <% include ../partials/footer %>
+
+
