@@ -68,6 +68,46 @@ router.get("/customers/:id/cards/:cardid", isAuthenticatedCustomer, function(req
 });
 
 
+//Request stamp
+router.post("/customers/:id/cards/:cardid", isAuthenticatedCustomer, function(req, res) {
+	Card.findById(req.params.cardid, function(err, userCard) {
+		if(err) {
+			console.log("error with retrieving user's card");
+			console.log(err);
+			res.redirect("/customers/"+ req.params.id + "/cards");
+		} else {
+			console.log("RETREIVED ALL USER'S CARDS");
+			var stampRequest = {
+				id: 0,
+				card: {
+					id: req.params.cardid
+				},
+				requesting_time: Date.now(),
+				granting_time: null
+			};
+			Stamp.create(stampRequest, function(err, newStampRequest) {
+				Campaign.findByIdAndUpdate(userCard.campaign.id, {
+					$addToSet: {
+						requests: {
+							_id:newStampRequest._id,
+							username:req.user.username
+						}
+					}
+				}, 
+				function(err, updatedCampaign) {if(err) {
+					res.render("customer/card", {user:req.user, card:userCard});
+				} else {
+					res.redirect("/customers/" + req.params.id + "/cards/" + req.params.cardid);
+				}}
+				);
+			});
+		}
+	});
+	
+});
+
+
+//Gets a card and requests a stamp
 router.post("/campaigns/:id", isAuthenticatedCustomer, function(req,res){
 	Campaign.findById(req.params.id, function(err, foundCampaign) {
 		if(err) {
@@ -124,10 +164,6 @@ router.post("/campaigns/:id", isAuthenticatedCustomer, function(req,res){
 						function(err, updatedCampaign) {if(err) {} else {}}
 						);
 					});
-
-
-
-
 					res.redirect("/campaigns");
 				}
 			})

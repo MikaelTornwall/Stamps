@@ -7,8 +7,10 @@
 <br>
 <ul>
 
+
+
 <% for(var i = 0; i < cards.length; i++) { %>
-<form action="#" id="request_stamp_form"</form>
+<form action="/customers/<%= user._id %>/cards/<%= cards[i]._id %>" id="request_stamp_form" method="POST"></form>
 	<li><p>
 	Number: <%= cards[i].id %> | 
 	Campaign: <%= cards[i].campaign.title %> | 

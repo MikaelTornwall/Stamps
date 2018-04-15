@@ -1,9 +1,8 @@
 <% include ../partials/header %>
 
-<h1>My Stamp card: <%= //card %></h1>
+<h1>My Stamp card: <%= card %></h1>
 <p>#<%= card.campaign.title %></p>
-<form action="#" id="request_stamp_form"></form>
-
+<form action="/customers/<%= user._id %>/cards/<%= card._id %>" id="request_stamp_form" method="POST"></form>
 <table style="border: 1px solid black; border-collapse: collapse;">
 	<% for(var i = 0; i < card.stamps_needed; i++) { %>
 		<% if((i % 2) === 0) { %>
@@ -25,7 +24,7 @@
 </table>
 <p>
 <input type="submit" class="btn btn-primary" form="request_stamp_form" value="Request Stamp"> | 
-<button>Redeem reward</button>
+<button>Redeem reward NOT IMPLEMENTED</button>
 </p>
 
 
