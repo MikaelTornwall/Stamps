@@ -1,0 +1,41 @@
+<% include ../partials/header %>
+
+<form action="/customers/<%= user._id %>/cards/<%= card._id %>" id="request_stamp_form" method="POST"></form>
+
+<h1>My Stamp card: <%= card %></h1>
+<p>#<%= card.campaign.title %></p>
+
+
+<!-- TÄMÄN SAA JA PITÄÄKIN KORVATA OMALLA TOTEUTUKSELLA. -->
+			<table style="border: 1px solid black; border-collapse: collapse;">
+				<% for(var i = 0; i < card.stamps_needed; i++) { %>
+					<% if((i % 2) === 0) { %>
+					<tr>
+						<td style="border: 1px solid black;  width:100px; height:100px;">
+						<% if(i < card.stamps.length) { %>
+							x
+						<% } %>
+						</td>
+					<% } else { %>
+						<td style="border: 1px solid black;  width:100px; height:100px;">
+						<% if(i < card.stamps.length) { %>
+							x
+						<% } %>
+						</td>
+					</tr>
+					<% } %>
+				<% } %>
+			</table>
+
+
+
+<p>
+<input type="submit" class="btn btn-primary" form="request_stamp_form" value="Request Stamp"> | 
+<button>Redeem reward NOT IMPLEMENTED</button>
+</p>
+
+
+
+
+
+<% include ../partials/footer %>

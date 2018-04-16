@@ -8,13 +8,19 @@ var userSchema = new mongoose.Schema({
 	role: Boolean,
 	cards: 
 		[{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Card"
+			id:{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Card"
+			},
+			title: String
 		}],
 	campaigns: 
 		[{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Campaign"
+			id:{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Campaign"
+			},
+			title: String
 		}],
 	signup_time: Date
 });

@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 
 var cardSchema = new mongoose.Schema({
+	id: Number,
 	stamps: 
 		[{
 			id: {
@@ -12,8 +13,9 @@ var cardSchema = new mongoose.Schema({
 		{
 			id: {
 				type: mongoose.Schema.Types.ObjectId,
-				ref: "Customer"
-			}
+				ref: "User"
+			},
+			username: String
 		},
 	campaign: 
 		{
@@ -21,10 +23,11 @@ var cardSchema = new mongoose.Schema({
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "Campaign"
 			},
-			name: String
+			title: String
 		},
-	claimed: Boolean,
-	claim_time: Date
+	stamps_needed: Number,
+	redeemed: Boolean,
+	redeem_time: Date
 });
 
 module.exports = mongoose.model("Card", cardSchema);

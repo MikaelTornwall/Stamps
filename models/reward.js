@@ -9,7 +9,8 @@ var rewardSchema = new mongoose.Schema({
 			id: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "Company"
-			}
+			},
+			username: String
 		}
 });
 
