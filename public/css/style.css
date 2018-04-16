@@ -1,0 +1,167 @@
+/* DOM Native elements */
+
+html {
+  height: 100vh;
+  font-size: 16px;
+}
+
+body {
+
+}
+
+a {
+  color: #FFA3AF !important;
+}
+
+a:hover,
+a:active {
+  color: #FFA3AF !important;
+}
+
+a:visited {
+  color: #FFA3AF !important;
+}
+
+ul {
+  list-style: none;
+}
+
+/* COMMON */
+
+.btn {
+  background-color: #FFA3AF !important;
+  border: none !important;
+  color: white;
+}
+
+.fa-coffee {
+  font-size: 2rem;
+  color: #FFA3AF;
+}
+
+/* *********************************************************************** */
+/* PARTIALS */
+/* Navigation bar */
+
+.container-fluid {
+  color: white;
+  background-color: rgba(50, 25, 0, 0.3);
+  background-size: cover;
+  height: 100%;
+}
+
+.frame {
+  height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1510149053388-87292573d661?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=18d7ef1ac6ffcd0a644aaa1d330278c6&auto=format&fit=crop&w=1651&q=80');
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.navbar {
+  color: white;
+  background-color: rgba(50, 25, 0, 1);
+  padding: 30vh;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+
+footer {
+  background-color: rgba(50, 25, 0, 1);
+  height: 15rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.footer-content {
+
+}
+
+/* Redeem */
+/* Request */
+
+/* *********************************************************************** */
+/* COMMON */
+/* Campaign */
+/* Campaigns */
+/* Index */
+/* Login */
+.login-heading {
+  text-align: center;
+}
+.login {
+  display: flex;
+  justify-content: center;
+}
+
+.customer-login {
+  padding: 3rem;
+  float: left;
+  display: block;
+}
+
+.company-login {
+  padding: 3rem;
+  float: left;
+  display: block;
+}
+
+/* Register */
+.register-heading {
+  text-align: center;
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+}
+
+.customer-signup {
+  padding: 3rem;
+  float: left;
+  display: block;
+}
+
+.company-signup {
+  padding: 3rem;
+  float: left;
+  display: block;
+}
+
+/* Reward */
+/* Rewards */
+
+/* *********************************************************************** */
+/* COMPANY */
+/* Admin */
+/* Index */
+/* Profile */
+
+/* *********************************************************************** */
+/* CUSTOMER */
+/* Cards */
+/* Profile */
+/* Stampcard */
+
+/* PAGES */
+/* Stamping */
+.stamping {
+  height: 100vh;
+  color: #FFA3AF;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.stamping-text {
+  margin-top: 10px;
+}
+
+.icon {
+  color: #FFA3AF;
+  font-size: 2rem;
+  margin-left: 1rem;
+}

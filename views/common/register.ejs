@@ -3,8 +3,14 @@
 <br>
 <br>
 
+<h2 class="register-heading">Register</h2>
+<div class="register">
+	<span class="customer-signup">
+
 <form action="/register/customer" method="post">
 	<div class="form-group">
+		<label for="#">Customer sign up</label>
+		<br>
 		<label for="username">Username</label>
 		<input type="text" class="form-control" name="username" placeholder="username">
 	</div>
@@ -12,9 +18,10 @@
 		<label for="password">Password</label>
 		<input type="text" class="form-control" name="password" placeholder="password">
 	</div>
-	
+
 	<input type="submit" class="btn btn-primary" value="Sign up">
 </form>
-
+</span>
+</div>
 
 <% include ../partials/footer %>
