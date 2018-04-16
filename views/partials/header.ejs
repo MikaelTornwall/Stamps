@@ -17,19 +17,20 @@
 <a href="/companies">Companies</a>
 <a href="/rewards">Rewards</a>
 
-<div style="float:right;">
 <%if(!currentUser) {%>
-<a href="/business/auth">Business</a> | 
-<a href="/login">Login</a> | 
+<a href="/business/auth">Business</a>
+<a href="/login">Login</a>
 <a href="/register">Sign up</a>
 <% } else if(currentUser.role) { %>
-<a href="/customers/USERNAME/cards">Profile</a> | 
+<a href="/customers/USERNAME/cards">Profile</a>
 <a href="/logout">Logout</a>
 <% } else { %>
-<a href="/companies/COMPANYNAME/admin">Admin</a> | 
+<a href="/companies/COMPANYNAME/admin">Admin</a>
 <a href="/logout">Logout</a>
 <% } %>
+</nav>
 </div>
+
 <br>
 <div class="frame">
   <div class="container-fluid">

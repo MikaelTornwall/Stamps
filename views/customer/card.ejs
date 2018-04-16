@@ -2,9 +2,15 @@
 
 <form action="/customers/<%= user._id %>/cards/<%= card._id %>" id="request_stamp_form" method="POST"></form>
 
-<h1>My Stamp card: <%= card %></h1>
-<p>#<%= card.campaign.title %></p>
 
+
+<div class="row">
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+<div class="card bg-light p-3">
+
+
+<h1>#<%= card.campaign.title %></h1>
 
 <!-- TÄMÄN SAA JA PITÄÄKIN KORVATA OMALLA TOTEUTUKSELLA. -->
 			<table style="border: 1px solid black; border-collapse: collapse;">
@@ -27,14 +33,13 @@
 				<% } %>
 			</table>
 
-
-
-<p>
+<br>
 <input type="submit" class="btn btn-primary" form="request_stamp_form" value="Request Stamp"> | 
 <button>Redeem reward NOT IMPLEMENTED</button>
-</p>
 
-
+</div>
+</div>
+</div>
 
 
 
