@@ -132,6 +132,10 @@ router.get("/register", function(req,res){
 	res.render("common/register");
 });
 
+router.get("/business/auth", function(req,res){
+	res.render("common/businessauth");
+});
+
 router.post("/login/customer", passport.authenticate("local", {
 	successRedirect: "/customers/" + "USERNAME" + "/cards",
 	failureRedirect: "/login",

@@ -2,19 +2,22 @@
 <html>
 <head></head>
 <body>
-<a href="/">home</a> | 
-<a href="/campaigns">campaigns</a> | 
-<a href="/companies">companies</a> | 
-<a href="/rewards">rewards</a> | 
+<a href="/">Home</a> | 
+<a href="/campaigns">Campaigns</a> | 
+<a href="/companies">Companies</a> | 
+<a href="/rewards">Rewards</a> | 
 
+<div style="float:right;">
 <%if(!currentUser) {%>
-<a href="/login">login</a> | 
-<a href="/register">sign up</a>
+<a href="/business/auth">Business</a> | 
+<a href="/login">Login</a> | 
+<a href="/register">Sign up</a>
 <% } else if(currentUser.role) { %>
-<a href="/customers/USERNAME/cards">profile</a> | 
-<a href="/logout">logout</a>
+<a href="/customers/USERNAME/cards">Profile</a> | 
+<a href="/logout">Logout</a>
 <% } else { %>
-<a href="/companies/COMPANYNAME/admin">admin</a> | 
-<a href="/logout">logout</a>
+<a href="/companies/COMPANYNAME/admin">Admin</a> | 
+<a href="/logout">Logout</a>
 <% } %>
+</div>
 <br>
