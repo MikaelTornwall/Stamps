@@ -3,9 +3,13 @@
 <br>
 <br>
 
-<p>customer sign up</p>
+<h2 class="register-heading">Register</h2>
+<div class="register">
+	<span class="customer-signup">
 <form action="/register/customer" method="post">
 	<div class="form-group">
+		<label for="#">Customer sign up</label>
+		<br>
 		<label for="username">Username</label>
 		<input type="text" class="form-control" name="username" placeholder="username">
 	</div>
@@ -13,16 +17,19 @@
 		<label for="password">Password</label>
 		<input type="text" class="form-control" name="password" placeholder="password">
 	</div>
-	
+
 	<input type="submit" class="btn btn-primary" value="Sign up">
 </form>
+</span>
 
 <br>
 <br>
 
-<p>company sign up</p>
+<span class="company-signup">
 <form action="/register/company" method="post">
 	<div class="form-group">
+		<label for="#">Company sign up</label>
+		<br>
 		<label for="image">Image URL</label>
 		<input type="text" class="form-control" name="image" placeholder="https://pbs.twimg.com/profile_images/844080964196319233/DbhESg8S_400x400.jpg">
 	</div>
@@ -36,6 +43,8 @@
 	</div>
 	<input type="submit" class="btn btn-primary" value="Sign up">
 </form>
+</span>
 
+</div>
 
 <% include ../partials/footer %>

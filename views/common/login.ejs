@@ -3,33 +3,40 @@
 <br>
 <br>
 
-<p>customer login</p>
+<h2 class="login-heading">Login</h2>
+<div class="login">
+	<span class="customer-login">
 <form action="/login/customer" method="post">
 	<div class="form-group">
+		<label for="#">Customer login</label>
+		<br>
 		<label for="username">Username</label>
-		<input type="text" class="form-control" name="username" placeholder="username">
+		<input type="text" class="form-control" name="username" placeholder="Username">
 	</div>
 	<div class="form-group">
 		<label for="password">Password</label>
-		<input type="text" class="form-control" name="password" placeholder="password">
+		<input type="text" class="form-control" name="password" placeholder="Password">
 	</div>
-	<input type="submit" class="btn btn-primary" value="Log in">
+	<input type="submit" class="btn" value="Log in">
 </form>
+</span>
 
-<br>
-<br>
-
-<p>company login</p>
+<span class="company-login">
 <form action="/login/company" method="post">
 	<div class="form-group">
+		<label for="#">Company login</label>
+		<br>
 		<label for="username">Username</label>
-		<input type="text" class="form-control" name="username" placeholder="username">
+		<input type="text" class="form-control" name="username" placeholder="Username">
 	</div>
 	<div class="form-group">
 		<label for="password">Password</label>
-		<input type="text" class="form-control" name="password" placeholder="password">
+		<input type="text" class="form-control" name="password" placeholder="Password">
 	</div>
-	<input type="submit" class="btn btn-primary" value="Log In">
+	<input type="submit" class="btn" value="Log In">
 </form>
+</span>
+
+</div>
 
 <% include ../partials/footer %>
