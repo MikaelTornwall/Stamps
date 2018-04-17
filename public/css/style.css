@@ -10,17 +10,19 @@ body {
 }
 
 a {
-  color: #FFA3AF !important;
+  color: rgba(110, 181, 192, 1) !important;
+  letter-spacing: 0.1rem;
 }
 
 a:hover,
 a:active {
-  color: #FFA3AF !important;
+  color: rgba(0, 108, 132, 1) !important;
+  text-decoration: none !important;
 }
 
-a:visited {
-  color: #FFA3AF !important;
-}
+/*a:visited {
+  color: rgba(110, 181, 192, 1) !important;
+}*/
 
 ul {
   list-style: none;
@@ -28,15 +30,32 @@ ul {
 
 /* COMMON */
 
+.stamping-logo {
+  font-family: 'Pacifico', cursive;
+  color: rgba(0, 108, 132, 1);
+  font-size: 1.5rem !important; 
+}
+
 .btn {
-  background-color: #FFA3AF !important;
+  background-color: rgba(255, 204, 187, 1) !important;
   border: none !important;
-  color: white;
+  color: rgba(110, 181, 192, 1) !important;
+  letter-spacing: 0.1rem;
+}
+
+.btn:hover,
+.btn:active,
+.btn.focus {
+  background-color: rgba(255, 204, 187, .7) !important;
+  color: rgba(0, 108, 132, 1) !important;
+}
+
+.card {
+  background: rgba(226, 232, 228, 1) !important;
 }
 
 .fa-coffee {
   font-size: 2rem;
-  color: #FFA3AF;
 }
 
 /* *********************************************************************** */
@@ -44,32 +63,29 @@ ul {
 /* Navigation bar */
 
 .container-fluid {
-  color: white;
-  background-color: rgba(50, 25, 0, 0.3);
+  background-color: rgba(255, 204, 187, 0.3);
   background-size: cover;
   height: 100%;
+  color: rgba(0, 108, 132, 1);
 }
 
 .frame {
   height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1510149053388-87292573d661?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=18d7ef1ac6ffcd0a644aaa1d330278c6&auto=format&fit=crop&w=1651&q=80');
+  background-image: url('https://images.unsplash.com/photo-1466094899371-97b327dff551?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5da4f459969e80c7381ce874c6b026ef&auto=format&fit=crop&w=2550&q=80');
   background-size: cover;
   background-attachment: fixed;
   position: relative;
 }
 
 .navbar {
-  color: white;
-  background-color: rgba(50, 25, 0, 1);
-  padding: 30vh;
-  font-size: 1.5rem;
+  background-color: rgba(255, 204, 187, 1);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* Footer */
 
 footer {
-  background-color: rgba(50, 25, 0, 1);
+  background-color: rgba(255, 204, 187, 1);
   height: 15rem;
   text-align: center;
   padding: 2rem;
@@ -90,23 +106,20 @@ footer {
 /* Login */
 .login-heading {
   text-align: center;
+  margin: 1.2rem 0;
+  letter-spacing: 0.2rem;
 }
+
 .login {
   display: flex;
   justify-content: center;
 }
 
-.customer-login {
-  padding: 3rem;
-  float: left;
-  display: block;
+.login-style {
+  color: rgba(0, 108, 132, 1);
 }
 
-.company-login {
-  padding: 3rem;
-  float: left;
-  display: block;
-}
+.not-registered{}
 
 /* Register */
 .register-heading {
@@ -116,6 +129,7 @@ footer {
 .register {
   display: flex;
   justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
 .customer-signup {
@@ -149,19 +163,27 @@ footer {
 /* Stamping */
 .stamping {
   height: 100vh;
-  color: #FFA3AF;
+  color: rgba(0, 108, 132, 1);
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
 }
 
-.stamping-text {
-  margin-top: 10px;
+.stamping-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 3.5rem;
+  color: rgba(0, 108, 132, 1);
 }
 
 .icon {
-  color: #FFA3AF;
+  color: rgba(110, 181, 192, 1);
   font-size: 2rem;
   margin-left: 1rem;
+}
+
+.icon:hover,
+.icon:active,
+.icon:focus {
+  color: rgba(0, 108, 132, 1)
 }
