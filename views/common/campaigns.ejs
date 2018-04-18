@@ -1,21 +1,31 @@
 <% include ../partials/header %>
 
+<div class="campaings row">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6">
 <h1>All campaigns list:</h1>
 <ul>
 <% for(var i = 0; i < campaigns.length; i++) { %>
 	<li>
-	<p>Title: <%= campaigns[i].title %></p>
-	<img src="<%= campaigns[i].image %>"" height="50" width="50">
+	<p>Title: <strong><%= campaigns[i].title %></strong></p>
+	<img src="<%= campaigns[i].image %>" height="50" width="50">
 	<p>
-	Description: <%= campaigns[i].description %> | 
-	Start: <%= campaigns[i].start_time %> | 
-	End: <%= campaigns[i].end_time %> | 
-	Reward: <%= campaigns[i].reward %> |
-	Stamps needed: <%= campaigns[i].stamps_needed %> |
-	<a href="/campaigns/<%= campaigns[i].id %>">view</a>
+	Description: <%= campaigns[i].description %>
+	<br>
+	Start: <%= campaigns[i].start_time %>
+	<br>
+	End: <%= campaigns[i].end_time %>
+	<br>
+	Reward: <%= campaigns[i].reward %>
+	<br>
+	Stamps needed: <%= campaigns[i].stamps_needed %> &nbsp
+	<button class="btn"<a href="/campaigns/<%= campaigns[i].id %>">view</a></button>
 	</p></li>
 <% } %>
 	<br>
 
 </ul>
+
+</div>
+</div>
 <% include ../partials/footer %>
