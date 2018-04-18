@@ -201,6 +201,7 @@ router.post("/register/customer", function(req,res){
 		{
 			image: req.body.image,
 			username: req.body.username,
+			email: req.body.email,
 			role: true,
 			cards: [],
 			campaigns: null,
@@ -209,13 +210,11 @@ router.post("/register/customer", function(req,res){
 	User.register(new User(newCustomer), req.body.password, function(err, user) {
 		if(err) {
 			console.log(err);
-			return res.render("register");
-		}
-		passport.authenticate("local") (req, res, function() {
+			res.redirect("/register");
+		} else	passport.authenticate("local") (req, res, function() {
 			res.redirect("/customers/" + user.username + "/cards");
 		});
 	});
-	res.redirect("/");
 });
 
 router.post("/register/company", function(req,res){
@@ -223,6 +222,7 @@ router.post("/register/company", function(req,res){
 		{
 			image: req.body.image,
 			username: req.body.username,
+			email: req.body.email,
 			role: false,
 			cards: null,
 			campaigns: [],
@@ -231,13 +231,11 @@ router.post("/register/company", function(req,res){
 	User.register(new User(newCompany), req.body.password, function(err, user) {
 		if(err) {
 			console.log(err);
-			return res.render("register");
-		}
-		passport.authenticate("local") (req, res, function() {
+			res.redirect("/business/auth");
+		} else 	passport.authenticate("local") (req, res, function() {
 			res.redirect("/companies/" + user.username + "/admin");
 		});
 	});
-	res.redirect("/");
 });
 
 
