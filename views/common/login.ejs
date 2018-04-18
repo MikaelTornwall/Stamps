@@ -2,32 +2,29 @@
 
 <br>
 <br>
+
 <div class="row">
-<div class="col-sm-3"></div>
-<div class="col-sm-6">
-<div class="card p-3 login-style">
-
-<h2 class="login-heading">Login</h2>
-<div class="login">
-	<span>
-<form action="/login/customer" method="post">
-	<div class="form-group">
-		<label for="username">Username</label>
-		<input type="text" class="form-control" name="username" placeholder="Username">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6">
+		<div class="card p-3 login-style">
+			<h2 class="login-heading">Login</h2>
+			<div class="login">
+				<span>
+					<form action="/login/customer" method="post">
+						<div class="form-group">
+							<label for="username">Username</label>
+							<input type="text" class="form-control" name="username" placeholder="Username">
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="text" class="form-control" name="password" placeholder="Password">
+						</div>
+						<input type="submit" class="btn btn-primary" value="Log in">
+					</form>
+				<p class="not-registered">Not registered? <a href="/register">Sign up here!</a></p>
+				</span>
+			</div>
+		</div>
 	</div>
-	<div class="form-group">
-		<label for="password">Password</label>
-		<input type="text" class="form-control" name="password" placeholder="Password">
-	</div>
-	<input type="submit" class="btn btn-primary" value="Log in">
-</form>
-<br>
-<br>
-<p class="not-registered">Not registered? <a href="/register">Sign up here!</a></p>
-</span>
-</div>
-
-</div>
-</div>
 </div>
 <% include ../partials/footer %>

@@ -4,33 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title></title>
-  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="/style.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- Navigation bar -->
-  <nav class="navbar justify-content-center">
-    <div class="container">
-<a class="navbar-brand stamping-logo" href="/">Stamping</a>
-<a class="nav-item nav-link" href="/campaigns">Campaigns</a>
-<a class="nav-item nav-link" href="/companies">Participants</a>
-<a class="nav-item nav-link" href="/rewards">Rewards</a>
-
-<%if(!currentUser) {%>
-<a class="nav-item nav-link" href="/business/auth">Business</a>
-<a class="nav-item nav-link" href="/login"><strong>Login</strong></a>
-<a class="nav-item nav-link" href="/register"><strong>Sign up</strong></a>
-<% } else if(currentUser.role) { %>
-<a class="nav-item nav-link" href="/customers/USERNAME/cards">Profile</a>
-<a class="nav-item nav-link" href="/logout">Logout</a>
-<% } else { %>
-<a class="nav-item nav-link" href="/companies/COMPANYNAME/admin">Admin</a>
-<a class="nav-item nav-link" href="/logout">Logout</a>
-<% } %>
-</nav>
-</div>
+<% include ../partials/navbar %>
 
 <div class="frame">
   <div class="container-fluid">
