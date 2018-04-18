@@ -62,30 +62,33 @@ router.put("/companies/:id/admin/campaigns/:campaignid/stamps/:stampid/", isAuth
 								_id:foundStamp._id
 							}
 						}
-					}, function(err, foundCard) {if(err) {} else {}}
+					}, function(err, foundCard) {
+						if(err) {
+						console.log("CARD TO BE GRANTED STAMP NOT FOUND, THUS NOT UPDATED");
+					} else {
+						//remove the stamp request from the requests array
+						Campaign.findById(req.params.campaignid, function(err, foundCampaign) {
+							if(err) {} else {
+								console.log("searching for request");
+								// res.redirect("/companies/"+req.params.id+"/admin/campaigns/"+req.params.campaignid);
+								for(var i = 0; i < foundCampaign.requests.length; i++) {
+									if(foundCampaign.requests[i]._id == req.params.stampid) {
+										console.log("stamp found in campaign requests");
+										foundCampaign.requests.splice(i,1);;
+										foundCampaign.save();
+									}
+								}
+								res.render("company/campaign", {user:req.user, id:req.params.id, campaign:foundCampaign});
+							}
+						});
+					}}
 				);
 			} else {
 				console.log("no stamp found, nothing updated");
 			}
 		}
+		
 	});
-	//remove the stamp request from the requests array
-	Campaign.findById(req.params.campaignid, function(err, foundCampaign) {
-		if(err) {} else {
-			console.log("searching for request");
-			res.redirect("/companies/"+req.params.id+"/admin/campaigns/"+req.params.campaignid);
-			for(var i = 0; i < foundCampaign.requests.length; i++) {
-				if(foundCampaign.requests[i]._id == req.params.stampid) {
-					console.log("stamp found in campaign requests");
-					foundCampaign.requests.splice(i,1);;
-					foundCampaign.save();
-				}
-			}
-			res.render("company/campaign", {user:req.user, id:req.params.id, campaign:foundCampaign});
-		}
-	});
-	
-	
 });
 
 router.post("/rewards", isAuthenticatedCompany, function(req,res){
