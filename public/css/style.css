@@ -33,7 +33,7 @@ ul {
 .stamping-logo {
   font-family: 'Pacifico', cursive;
   color: rgba(0, 108, 132, 1);
-  font-size: 1.5rem !important; 
+  font-size: 1.5rem !important;
 }
 
 .btn {
@@ -52,6 +52,7 @@ ul {
 
 .card {
   background: rgba(226, 232, 228, 1) !important;
+  margin-bottom: 2rem;
 }
 
 .fa-coffee {
@@ -70,7 +71,7 @@ ul {
 }
 
 .frame {
-  height: 100vh;
+  height: 100%;
   background-image: url('https://images.unsplash.com/photo-1466094899371-97b327dff551?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5da4f459969e80c7381ce874c6b026ef&auto=format&fit=crop&w=2550&q=80');
   background-size: cover;
   background-attachment: fixed;
