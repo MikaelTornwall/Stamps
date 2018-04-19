@@ -64,7 +64,7 @@ ul {
 /* Navigation bar */
 
 .container-fluid {
-  background-color: rgba(2, 28, 30, 0.1);
+  background-color: rgba(2, 28, 30, 0.05);
   background-size: cover;
   height: 100%;
   color: rgba(0, 68, 69, 1);

@@ -12,15 +12,15 @@
 <% for(var i = 0; i < cards.length; i++) { %>
 <form action="/customers/<%= user._id %>/cards/<%= cards[i]._id %>" id="request_stamp_form" method="POST"></form>
 	<li><p>
-	Number: <%= cards[i].id %> | 
-	Campaign: <%= cards[i].campaign.title %> | 
-	Stamps: <%= cards[i].stamps.length %> | 
+	Number: <%= cards[i].id %> |
+	Campaign: <%= cards[i].campaign.title %> |
+	Stamps: <%= cards[i].stamps.length %> |
 	<% if(cards[i].redeemed) { %>
 	<strike>Redeemed</strike>
 <% } else { %>
 	<input type="submit" class="btn btn-primary" form="request_stamp_form" value="Request Stamp">
 <% } %>
-	<a href="/customers/CUSTOMERNAME/cards/<%= cards[i]._id %>">View</a> 
+	<button class="btn"><a href="/customers/CUSTOMERNAME/cards/<%= cards[i]._id %>">View</a></button>
 	</p></li>
 <% } %>
 
