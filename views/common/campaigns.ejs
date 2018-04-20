@@ -1,11 +1,12 @@
 <% include ../partials/header %>
 
-<div class="campaings row">
+<div class="campaigns row">
 	<div class="col-sm-3"></div>
 	<div class="col-sm-6">
-<h1>All campaigns list:</h1>
+<h1 class="campaign-title pt-3">All Campaigns:</h1>
 <ul>
 <% for(var i = 0; i < campaigns.length; i++) { %>
+<div class="campaign-bg">
 	<li>
 	<p>Title: <strong><%= campaigns[i].title %></strong></p>
 	<img src="<%= campaigns[i].image %>" height="50" width="50">
@@ -21,6 +22,7 @@
 	Stamps needed: <%= campaigns[i].stamps_needed %> &nbsp
 	<button class="btn"><a href="/campaigns/<%= campaigns[i].id %>">view</a></button>
 	</p></li>
+</div>
 <% } %>
 	<br>
 
