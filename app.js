@@ -24,7 +24,8 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 
-var url = process.env.DATABASEURL || "mongodb://localhost/stamps";
+// var url = process.env.DATABASEURL || "mongodb://localhost/stamps";
+var url = "mongodb://localhost/stamps";
 mongoose.connect(url);
 
 var commonRoute = require("./routes/commonRoutes");
@@ -35,10 +36,8 @@ app.use(companyRoute);
 app.use(customerRoute);
 
 var User = require("./models/user");
-var Card = require("./models/card");
 var Stamp = require("./models/stamp");
 var Campaign = require("./models/campaign");
-var Reward = require("./models/reward");
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());

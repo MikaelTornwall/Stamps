@@ -1,15 +1,36 @@
 <% include ../partials/header %>
-
-<h1><%= campaign.title %></h1>
-<img src="<%= campaign.image %>" width="200px" height="200px">
-<form action="/campaigns/<%= campaign.id %>" id="get_card_form" method="POST"></form>
-<p>
-Description: <%= campaign.description %> | 
-Start: <%= campaign.start_time %> | 
-End: <%= campaign.end_time %> | 
-Reward: <%= campaign.reward %> |
-Stamps needed: <%= campaign.stamps_needed %> | 
-<input type="submit" class="btn btn-primary" form="get_card_form" value="Get Card">
-</p>
+<br>
+<div class="row">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6">
+		<div class="card p-3">
+			<h1><%= campaign.title %></h1>
+			<img src="<%= campaign.image %>" width="200px" height="200px">
+			<br>
+			<form action="/campaigns/<%= campaign.title %>" id="get_card_form" method="GET"></form>
+			<p>
+				Started by: <%= campaign.company %>
+				<br>
+				Description: <%= campaign.description %>
+				<br>
+				Start: <%= campaign.start_time %>
+				<br>
+				End: <%= campaign.end_time %>
+				<br>
+				Reward: <%= campaign.reward %>
+				<br>
+				Stamps needed: <%= campaign.stamps_needed %>
+				<br>
+				<br>
+				<input type="submit" class="btn btn-primary" form="get_card_form" value="Get Card">
+			</p>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="card p-3">
+			<p>campaign object for debugging: <%= campaign %></p>
+		</div>
+	</div>
+</div>
 
 <% include ../partials/footer %>

@@ -1,44 +1,45 @@
 <% include ../partials/header %>
 
-<form action="/customers/<%= user._id %>/cards/<%= card._id %>" id="request_stamp_form" method="POST"></form>
+<!--<form action="/<%=// campaign.company.username %>/<%=// campaign.title %>" id="request_stamp_form" method="POST"></form>-->
+<form action="/unicafe/circularmay/LOCATION" id="request_stamp_form" method="POST"></form>
 
 
 
 <div class="row">
-<div class="col-sm-3"></div>
-<div class="col-sm-6">
-<div class="card bg-light p-3">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6">
+		<div class="card bg-light p-3">
 
 
-<h1>#<%= card.campaign.title %></h1>
+		<h1>#<%= campaign.title %></h1>
 
-<!-- TÄMÄN SAA JA PITÄÄKIN KORVATA OMALLA TOTEUTUKSELLA. -->
-			<table style="border: 1px solid black; border-collapse: collapse;">
-				<% for(var i = 0; i < card.stamps_needed; i++) { %>
-					<% if((i % 2) === 0) { %>
-					<tr>
-						<td style="border: 1px solid black;  width:100px; height:100px;">
-						<% if(i < card.stamps.length) { %>
-							<i class="fas fa-coffee"></i>
+		<!-- TÄMÄN SAA JA PITÄÄKIN KORVATA OMALLA TOTEUTUKSELLA. -->
+					<table style="border: 1px solid black; border-collapse: collapse;">
+						<% for(var i = 0; i < campaign.stamps_needed; i++) { %>
+							<% if((i % 2) === 0) { %>
+							<tr>
+								<td style="border: 1px solid black;  width:100px; height:100px;">
+								<% if(i < stamps.length) { %>
+									<i class="fas fa-coffee"></i>
+								<% } %>
+								</td>
+							<% } else { %>
+								<td style="border: 1px solid black;  width:100px; height:100px;">
+								<% if(i < stamps.length) { %>
+									<i class="fas fa-coffee"></i>
+								<% } %>
+								</td>
+							</tr>
+							<% } %>
 						<% } %>
-						</td>
-					<% } else { %>
-						<td style="border: 1px solid black;  width:100px; height:100px;">
-						<% if(i < card.stamps.length) { %>
-							<i class="fas fa-coffee"></i>
-						<% } %>
-						</td>
-					</tr>
-					<% } %>
-				<% } %>
-			</table>
+					</table>
 
-<br>
-<input type="submit" class="btn btn-primary" form="request_stamp_form" value="Request Stamp">
-<button class="btn">Redeem reward NOT IMPLEMENTED</button>
+		<br>
+		<input type="submit" class="btn btn-primary" form="request_stamp_form" value="Request Stamp">
+		<button class="btn">Redeem reward NOT IMPLEMENTED</button>
 
-</div>
-</div>
+		</div>
+	</div>
 </div>
 
 

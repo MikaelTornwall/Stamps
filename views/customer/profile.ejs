@@ -1,10 +1,24 @@
 <% include ../partials/header %>
-
-<h1>My page</h1>
 <br>
-<ul>my stamp cards
-	<li>#circularMay | Card number: 1 | Stamps: 6 | <% include ../partials/request %> | <% include ../partials/redeem %> </li>
-	<li>#circularMay | Card number: 2 | Stamps: 6 | <% include ../partials/request %> | <% include ../partials/redeem %> </li>
-</ul>
+<br>
+<div class="row">	
+	<div class="col-sm-3">
+			<div class="card p-3">
+		</div>
+	</div>
+
+	<div class="col-sm-6">
+		<div class="card p-3">
+
+		</div>
+	</div>
+
+	<div class="col-sm-3">
+		<div class="card p-3">
+			<p>user object for debugging: <%= user %></p>
+		</div>
+	</div>
+	
+</div>
 
 <% include ../partials/footer %>

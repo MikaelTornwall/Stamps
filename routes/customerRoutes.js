@@ -2,21 +2,14 @@ var express = require("express");
 var router = express.Router();
 
 var User = require("../models/user");
-var Card = require("../models/card");
 var Campaign = require("../models/campaign");
 var Stamp = require("../models/stamp");
-
+var middleware = require("../middleware/index.js");
 
 //========================================================
 //MIDDLEWARE
 //========================================================
-function isAuthenticatedCustomer(req,res,next) {
-	if(req.isAuthenticated() && req.user.role) {
-		return next();
-	}
-	req.flash("error", "Please login first");
-	res.redirect("/login");
-}
+
 
 router.use(function(req, res, next){
 	res.locals.currentUser = req.user;
@@ -31,15 +24,42 @@ router.use(function(req, res, next){
 
 
 
+router.get("/customer", middleware.isAuthenticatedCustomer, function(req,res){
+	res.render("customer/profile", {user:req.user});
+});
+
+router.get("/customer/:campaigntitle", middleware.isAuthenticatedCustomer, function(req,res){
+		Campaign.find({title:req.params.campaigntitle}, function(err, foundCampaign) {
+		if(err) {
+			console.log("error retreiving campaign");
+			res.redirect("/admin");
+		} else {
+			console.log("campaigns retreived");
+			Stamp.find({"campaign.title":req.params.campaigntitle}, function(err, foundStamps) {
+				if(err) {
+					console.log("error retreiving stamps");
+					res.redirect("/admin");
+				} else {
+					console.log("stamps retreived");
+					res.render("customer/card", {user:req.user, stamps:foundStamps, campaign:foundCampaign});
+				}
+			});
+		}
+	});
+	
+});
+
+/**********************************************************************************************************
+Old routes, don't use
+/**********************************************************************************************************/
 
 
-
-router.get("/customers/:id", isAuthenticatedCustomer, function(req,res){
+router.get("/customers/:id", middleware.isAuthenticatedCustomer, function(req,res){
 	res.redirect("/customers/" + req.params.id + "/cards");
 	// res.render("customer/profile", {id:req.params.id});
 });
 //require login
-router.get("/customers/:id/cards", isAuthenticatedCustomer, function(req, res) {
+router.get("/customers/:id/cards", middleware.isAuthenticatedCustomer, function(req, res) {
 	Card.find({"owner.username":req.user.username}, function(err, userCards) {
 		if(err) {
 			console.log("error with retrieving user's cards");
@@ -57,7 +77,7 @@ router.get("/customers/:id/cards", isAuthenticatedCustomer, function(req, res) {
 	});
 });
 
-router.get("/customers/:id/cards/:cardid", isAuthenticatedCustomer, function(req, res) {
+router.get("/customers/:id/cards/:cardid", middleware.isAuthenticatedCustomer, function(req, res) {
 	Card.findById(req.params.cardid, function(err, userCard) {
 		if(err) {
 			console.log("error with retrieving user's card");
@@ -73,7 +93,7 @@ router.get("/customers/:id/cards/:cardid", isAuthenticatedCustomer, function(req
 
 
 //Request stamp
-router.post("/customers/:id/cards/:cardid", isAuthenticatedCustomer, function(req, res) {
+router.post("/customers/:id/cards/:cardid", middleware.isAuthenticatedCustomer, function(req, res) {
 	Card.findById(req.params.cardid, function(err, userCard) {
 		if(err) {
 			console.log("error with retrieving user's card");
@@ -113,7 +133,7 @@ router.post("/customers/:id/cards/:cardid", isAuthenticatedCustomer, function(re
 
 
 //Gets a card and requests a stamp
-router.post("/campaigns/:id", isAuthenticatedCustomer, function(req,res){
+router.post("/campaigns/:id", middleware.isAuthenticatedCustomer, function(req,res){
 	Campaign.findById(req.params.id, function(err, foundCampaign) {
 		if(err) {
 			console.log(err)

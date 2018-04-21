@@ -2,23 +2,19 @@ var express = require("express");
 var router = express.Router();
 
 var User = require("../models/user");
-var Card = require("../models/card");
 var Stamp = require("../models/stamp");
 var Campaign = require("../models/campaign");
-var Reward = require("../models/reward");
+var middleware = require("../middleware/index.js");
 
 //========================================================
 //MIDDLEWARE
 //========================================================
-function isAuthenticatedCompany(req,res,next) {
-	if(req.isAuthenticated() && !req.user.role) {
-		return next();
-	}
-	res.redirect("/login");
-}
+
 
 router.use(function(req, res, next){
 	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
 	next();
 });
 
@@ -27,12 +23,72 @@ router.use(function(req, res, next){
 //BASIC ROUTES 
 //========================================================
 
+//get company page by id
+// router.get("/companies/:id/admin", middleware.isAuthenticatedCompany, function(req,res){
+// 	res.render("company/admin", {user:req.user, id:req.params.id, campaigns:req.user.campaigns});
+// });
 
-router.get("/companies/:id/admin", isAuthenticatedCompany, function(req,res){
-	res.render("company/admin", {user:req.user, id:req.params.id, campaigns:req.user.campaigns});
+//get company page by username
+router.get("/admin", middleware.isAuthenticatedCompany, function(req,res){
+	Campaign.find({"company.username":req.params.username}, function(err, foundCampaigns) {
+	// Campaign.find({}, function(err, foundCampaigns) {
+		if(err) {
+			console.log("error retreiving campaigns");
+			req.flash("error","error retreiving campaigns");
+		} else {
+			console.log("campaigns retreived");
+			req.flash("success","found the campaigns");
+			res.render("company/admin", {user:req.user, campaigns:foundCampaigns});
+		}
+	});
+	
 });
 
-router.get("/companies/:id/admin/campaigns/:campaignid", isAuthenticatedCompany, function(req,res){
+router.get("/admin/:campaigntitle", middleware.isAuthenticatedCompany, function(req,res){
+	Campaign.find({title:req.params.campaigntitle}, function(err, foundCampaign) {
+	// Campaign.find({}, function(err, foundCampaigns) {
+		if(err) {
+			console.log("error retreiving campaign");
+			req.flash("error","error retreiving campaign");
+			res.redirect("/admin");
+		} else {
+			console.log("campaigns retreived");
+			req.flash("success","found the campaign");
+			res.render("company/campaign", {user:req.user, campaign:foundCampaign});
+		}
+	});
+});
+
+router.post("/admin/campaigns", middleware.isAuthenticatedCompany, function(req,res){
+	var campaign = {
+		title: req.body.title,
+		image: req.body.image,
+		start_time: req.body.start,
+		end_time: req.body.end,
+		description: req.body.description,
+		reward: req.body.reward,
+		stamps_needed: req.body.stamps,
+		company: req.user,
+		locations: []
+	};
+	Campaign.create(campaign, function(err, newCampaign) {
+		if(err) {
+			console.log("Campaign creation failed");
+			req.flash("error", "Campaign creation failed");
+			res.redirect("/companies/COMPANYNAME/admin");
+		} else {
+			console.log("Campaign created");
+			req.flash("success", "Campaign successfully created");
+			res.redirect("/campaigns");
+		}
+	})
+});
+
+/**********************************************************************************************************
+Old routes, don't use
+/**********************************************************************************************************/
+
+router.get("/companies/:id/admin/campaigns/:campaignid", middleware.isAuthenticatedCompany, function(req,res){
 	Campaign.findById(req.params.campaignid, function(err, foundCampaign) {
 		if(err) {
 			console.log("error reaching admin campaigns");
@@ -44,7 +100,7 @@ router.get("/companies/:id/admin/campaigns/:campaignid", isAuthenticatedCompany,
 	});
 });
 
-router.put("/companies/:id/admin/campaigns/:campaignid/stamps/:stampid/", isAuthenticatedCompany, function(req,res){
+router.put("/companies/:id/admin/campaigns/:campaignid/stamps/:stampid/", middleware.isAuthenticatedCompany, function(req,res){
 	Stamp.findById(req.params.stampid, function(err, foundStamp) {
 		if(err) {
 			console.log("STAMP NOT FOUND WHILE GRANTING STAMP");
@@ -91,56 +147,6 @@ router.put("/companies/:id/admin/campaigns/:campaignid/stamps/:stampid/", isAuth
 	});
 });
 
-router.post("/rewards", isAuthenticatedCompany, function(req,res){
-	var reward = {
-		title: req.body.title,
-		image: req.body.image,
-		description: req.body.description,
-		company: {
-			id: req.user.id_,
-			name: req.user.username
-		}
-	};
-	Reward.create(reward, function(err, newReward) {
-		if(err) {
-			console.log("error creating reward");
-			res.redirect("/companies/COMPANYNAME/admin");
-		} else {
-			res.redirect("/rewards");
-		}
-	})
-});
 
-router.post("/campaigns", isAuthenticatedCompany, function(req,res){
-	var campaign = {
-		title: req.body.title,
-		image: req.body.image,
-		start_time: req.body.start,
-		end_time: req.body.end,
-		description: req.body.description,
-		reward: req.body.reward,
-		stamps_needed: req.body.stamps,
-		requests: []
-	};
-	Campaign.create(campaign, function(err, newCampaign) {
-		if(err) {
-			console.log("error creating reward");
-			res.redirect("/companies/COMPANYNAME/admin");
-		} else {
-			User.findByIdAndUpdate(req.user._id,
-				{
-					$addToSet: {
-						campaigns: {
-							_id:newCampaign._id,
-							title:newCampaign.title
-						}
-					}
-				},
-				function(err,updatedUser) {if(err) {} else {}}
-			);
-			res.redirect("/campaigns");
-		}
-	})
-});
 
 module.exports = router;

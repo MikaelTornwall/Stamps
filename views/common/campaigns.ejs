@@ -8,7 +8,7 @@
 <% for(var i = 0; i < campaigns.length; i++) { %>
 <div class="campaign-bg">
 	<li>
-	<a class="view-link campaign-title" href="/campaigns/<%= campaigns[i].id %>">
+	<a class="view-link campaign-title" href="/campaigns/<%= campaigns[i].title %>">
 		<p class="campaign-title">
 			<strong><%= campaigns[i].title %></strong>
 		</p>
@@ -17,6 +17,8 @@
 		<img src="<%= campaigns[i].image %>" height="200" width="250">
 	</span>
 	<p>
+	<strong>Started by:</strong> <%= campaigns[i].company.username %>
+	<br>
 	<strong>Description:</strong> <%= campaigns[i].description %>
 	<br>
 	<strong>Start:</strong> <%= campaigns[i].start_time %>
@@ -25,10 +27,9 @@
 	<br>
 	<strong>Reward:</strong> <%= campaigns[i].reward %>
 	<br>
-	<strong>Stamps needed:</strong> <%= campaigns[i].stamps_needed %> &nbsp
+	<strong>Stamps needed:</strong> <%= campaigns[i].stamps_needed %> 
 	<br>
 	<br>
-
 	</p></li>
 </div>
 <% } %>

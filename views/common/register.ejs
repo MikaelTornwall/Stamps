@@ -13,13 +13,13 @@
 					<form action="/register/customer" method="post">
 						<div class="form-group">
 							<label for="username">Username</label>
-							<input type="text" class="form-control" name="username" placeholder="Username">
+							<input type="text" class="form-control" name="username" placeholder="Username" required>
 							<label class="pt-2" for="username">Email</label>
-							<input type="text" class="form-control" name="email" placeholder="Email">
+							<input type="text" class="form-control" name="email" placeholder="example@gmail.com" required>
 							<label class="pt-2" for="password">Password</label>
-							<input type="text" class="form-control" name="password" placeholder="Password">
+							<input type="password" class="form-control" name="password" placeholder="Password" required>
 							<label class="pt-2" for="password">Confirm password</label>
-							<input type="text" class="form-control" name="confirm_password" placeholder="Confirm password">
+							<input type="password" class="form-control" name="confirm_password" placeholder="confirm password" required>
 						</div>
 						<input type="submit" class="btn mt-2" value="Sign up">
 					</form>

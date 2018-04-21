@@ -3,10 +3,7 @@ var router = express.Router();
 var passport = require("passport");
 
 var User = require("../models/user");
-// // var Card = require("../models/card");
-// // var Stamp = require("../models/stamp");
 var Campaign = require("../models/campaign");
-var Reward = require("../models/reward");
 
 router.use(function(req, res, next){
 	res.locals.currentUser = req.user;
@@ -114,15 +111,15 @@ function getAllOfTypeAndRender(res, Schema, filename) {
 //========================================================
 
 
-router.get("/companies/", function(req,res){	
-	getUsersAndRender(res, COMPANY, "company/index");
-	//move to generic and parametrized functions next
-	// getAllOfTypeAndRender(res, User, "company/index");
-});
+// router.get("/companies/", function(req,res) {
+// 	getUsersAndRender(res, COMPANY, "company/index");
+// 	//move to generic and parametrized functions next
+// 	// getAllOfTypeAndRender(res, User, "company/index");
+// });
 
-router.get("/companies/:id", function(req,res){
-	getUserByIdAndRender(res, req.params.id, "company/profile")
-});
+// router.get("/companies/:id", function(req,res){
+// 	getUserByIdAndRender(res, req.params.id, "company/profile")
+// });
 
 
 router.get("/", function(req,res){
@@ -130,49 +127,38 @@ router.get("/", function(req,res){
 });
 
 router.get("/campaigns", function(req,res){
-	getCampaignsAndRender(res, "common/campaigns");
-});
-
-router.get("/campaigns/:id", function(req,res) {
-	getCampaignByIdAndRender(res, req.params.id, "common/campaign");
-});
-
-router.get("/rewards", function(req,res){
-
-	// getAllOfTypeAndRender(res, Reward, "common/rewards");
-	Reward.find({}, function(err, allRewards) {
+	// getCampaignsAndRender(res, "common/campaigns");
+	Campaign.find({}, function(err, allCampaigns) {
 		if(err) {
-			console.log("error with retrieving rewards");
-			console.log(err);
-			res.render("index");
+			console.log("error retreiving campaign");
+			res.redirect("/");
 		} else {
-			if(!allRewards.length) {
-				console.log("NO REWARDS FOUND");	
+			if(!allCampaigns.length) {
 				res.render("common/notfound");
 			} else {
-				console.log("RETREIVED ALL REWARDS");
-				res.render("common/rewards", {rewards:allRewards});
+				console.log("RETREIVED ALL CAMPAIGNS");
+				res.render("common/campaigns", {campaigns:allCampaigns});
 			}
 		}
 	});
 });
 
-
-
-router.get("/rewards/:id", function(req,res){
-	Reward.findById(req.params.id, function(err, foundReward) {
+router.get("/campaigns/:title", function(req,res) {
+	Campaign.find({title:req.params.title}, function(err, foundCampaign) {
 		if(err) {
-			res.redirect("/rewards");
+			console.log("error retreiving campaign");
+			res.redirect("/");
 		} else {
-			if(!foundReward) {
-				console.log("REWARD NOT FOUND");
-				res.render("common/notfound");
-			} else {
-				res.render("common/reward", {reward:foundReward});
-			}
+			console.log("campaign retreived");
+			res.render("common/campaign", {campaign:foundCampaign});
 		}
 	});
 });
+
+// router.get("/campaigns/:id", function(req,res) {
+// 	getCampaignByIdAndRender(res, req.params.id, "common/campaign");
+// });
+
 
 router.get("/login", function(req,res){
 	res.render("common/login");
@@ -187,14 +173,14 @@ router.get("/business/auth", function(req,res){
 });
 
 router.post("/login/customer", passport.authenticate("local", {
-	successRedirect: "/customers/" + "USERNAME" + "/cards",
+	successRedirect: "/customer",
 	failureRedirect: "/login",
 	failureFlash: true
 }), function(req,res) {});
 
 router.post("/login/company", passport.authenticate("local", {
-	successRedirect: "/companies/" + "COMPANYNAME" + "/admin",
-	failureRedirect: "/login",
+	successRedirect: "/admin",
+	failureRedirect: "/business/auth",
 	failureFlash: true
 }), function(req,res) {});
 
@@ -217,7 +203,7 @@ router.post("/register/customer", function(req,res){
 			req.flash("error", err.message);
 			res.redirect("/register");
 		} else passport.authenticate("local") (req, res, function() {
-			res.redirect("/customers/" + user.username + "/cards");
+			res.redirect("/customer");
 		});
 	});
 });
@@ -239,7 +225,7 @@ router.post("/register/company", function(req,res){
 			req.flash("error", err.message);
 			res.redirect("/business/auth");
 		} else 	passport.authenticate("local") (req, res, function() {
-			res.redirect("/companies/" + user.username + "/admin");
+			res.redirect("/admin");
 		});
 	});
 });
