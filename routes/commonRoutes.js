@@ -10,6 +10,8 @@ var Reward = require("../models/reward");
 
 router.use(function(req, res, next){
 	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
 	next();
 });
 
@@ -187,11 +189,13 @@ router.get("/business/auth", function(req,res){
 router.post("/login/customer", passport.authenticate("local", {
 	successRedirect: "/customers/" + "USERNAME" + "/cards",
 	failureRedirect: "/login",
+	failureFlash: true
 }), function(req,res) {});
 
 router.post("/login/company", passport.authenticate("local", {
 	successRedirect: "/companies/" + "COMPANYNAME" + "/admin",
 	failureRedirect: "/login",
+	failureFlash: true
 }), function(req,res) {});
 
 
@@ -210,8 +214,9 @@ router.post("/register/customer", function(req,res){
 	User.register(new User(newCustomer), req.body.password, function(err, user) {
 		if(err) {
 			console.log(err);
+			req.flash("error", err.message);
 			res.redirect("/register");
-		} else	passport.authenticate("local") (req, res, function() {
+		} else passport.authenticate("local") (req, res, function() {
 			res.redirect("/customers/" + user.username + "/cards");
 		});
 	});
@@ -231,6 +236,7 @@ router.post("/register/company", function(req,res){
 	User.register(new User(newCompany), req.body.password, function(err, user) {
 		if(err) {
 			console.log(err);
+			req.flash("error", err.message);
 			res.redirect("/business/auth");
 		} else 	passport.authenticate("local") (req, res, function() {
 			res.redirect("/companies/" + user.username + "/admin");
@@ -241,6 +247,7 @@ router.post("/register/company", function(req,res){
 
 router.get("/logout",function(req, res){
 	req.logout();
+	req.flash("success", "Logged out");
 	res.redirect("/");
 });
 

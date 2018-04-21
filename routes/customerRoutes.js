@@ -14,11 +14,14 @@ function isAuthenticatedCustomer(req,res,next) {
 	if(req.isAuthenticated() && req.user.role) {
 		return next();
 	}
+	req.flash("error", "Please login first");
 	res.redirect("/login");
 }
 
 router.use(function(req, res, next){
 	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
 	next();
 });
 
@@ -32,7 +35,8 @@ router.use(function(req, res, next){
 
 
 router.get("/customers/:id", isAuthenticatedCustomer, function(req,res){
-	res.render("customer/profile", {id:req.params.id});
+	res.redirect("/customers/" + req.params.id + "/cards");
+	// res.render("customer/profile", {id:req.params.id});
 });
 //require login
 router.get("/customers/:id/cards", isAuthenticatedCustomer, function(req, res) {
@@ -97,6 +101,7 @@ router.post("/customers/:id/cards/:cardid", isAuthenticatedCustomer, function(re
 				function(err, updatedCampaign) {if(err) {
 					res.render("customer/card", {user:req.user, card:userCard});
 				} else {
+					req.flash("success", "Stamp requested");
 					res.redirect("/customers/" + req.params.id + "/cards/" + req.params.cardid);
 				}}
 				);

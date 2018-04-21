@@ -1,11 +1,12 @@
-var bodyParser = 			require("body-parser"),
-	methodOverride = 		require("method-override"),
-	mongoose = 				require("mongoose"),
-	passport = 				require("passport"),
-	LocalStrategy = 		require("passport-local"),
-	passportLocalMongoose = require("passport-local-mongoose"),
-	express = 				require("express"),
-	app		= 				express();
+var bodyParser 				= require("body-parser"),
+	methodOverride 			= require("method-override"),
+	mongoose 				= require("mongoose"),
+	flash					= require("connect-flash"),
+	passport 				= require("passport"),
+	LocalStrategy 			= require("passport-local"),
+	passportLocalMongoose 	= require("passport-local-mongoose"),
+	express 				= require("express"),
+	app						= express();
 
 app.use(require("express-session")({
 	secret: "SECRETSTRING",
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 // app.use(express.static(__dirname + "/public/"));
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 
 var url = process.env.DATABASEURL || "mongodb://localhost/stamps";
