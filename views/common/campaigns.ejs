@@ -3,26 +3,32 @@
 <div class="campaigns row">
 	<div class="col-sm-3"></div>
 	<div class="col-sm-6">
-<h1 class="campaign-title pt-3">All Campaigns:</h1>
+<h1 class="campaign-heading pt-3">All Campaigns:</h1>
 <ul>
 <% for(var i = 0; i < campaigns.length; i++) { %>
 <div class="campaign-bg">
 	<li>
-	<p>Title: <strong><%= campaigns[i].title %></strong></p>
-	<img src="<%= campaigns[i].image %>" height="50" width="50">
+	<a class="view-link campaign-title" href="/campaigns/<%= campaigns[i].id %>">
+		<p class="campaign-title">
+			<strong><%= campaigns[i].title %></strong>
+		</p>
+	</a>
+	<span class="img-container">
+		<img src="<%= campaigns[i].image %>" height="200" width="250">
+	</span>
 	<p>
-	Description: <%= campaigns[i].description %>
+	<strong>Description:</strong> <%= campaigns[i].description %>
 	<br>
-	Start: <%= campaigns[i].start_time %>
+	<strong>Start:</strong> <%= campaigns[i].start_time %>
 	<br>
-	End: <%= campaigns[i].end_time %>
+	<strong>End:</strong> <%= campaigns[i].end_time %>
 	<br>
-	Reward: <%= campaigns[i].reward %>
+	<strong>Reward:</strong> <%= campaigns[i].reward %>
 	<br>
-	Stamps needed: <%= campaigns[i].stamps_needed %> &nbsp
+	<strong>Stamps needed:</strong> <%= campaigns[i].stamps_needed %> &nbsp
 	<br>
 	<br>
-	<button class="btn"><a class="view-link" href="/campaigns/<%= campaigns[i].id %>">view</a></button>
+
 	</p></li>
 </div>
 <% } %>
