@@ -112,19 +112,50 @@ footer {
 /* COMMON */
 /* Campaign */
 /* Campaigns */
-
-.campaign-title {
+.campaign-heading {
   text-align: center;
 }
 
-.campaign-bg {
-  background: rgba(36, 31, 32, .4);
-  padding: 1rem;
-  margin: 1rem 0;
+.campaign-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 200px;
+  width: 250px;
+  /* Has to be kept same as image dimensions */
+  background-color: rgba(0, 95, 146, .5);
 }
 
-.campaign-bg:hover {
-  box-shadow: 0 3px 5px rgba(36, 31, 32, .5);
+.campaign-title:hover {
+  background-color: rgba(0, 95, 146, .2);
+}
+
+
+.img-container {
+    height: 200px;
+    width: 250px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+img.container img.campaigns {
+  width: 100%;
+}
+
+img.campaigns {
+  display: inline;
+
+}
+
+.campaign-bg {
+  background: rgba(36, 31, 32, .1);
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0 0 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 1px 3px rgba(36, 31, 32, .3);
+
 }
 
 a.view-link {
@@ -150,6 +181,10 @@ a.view-link {
 .login {
   display: flex;
   justify-content: center;
+}
+
+a.login {
+  color: rgba(255, 255, 255, 1);
 }
 
 .login-style {
