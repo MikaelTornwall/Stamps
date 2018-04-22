@@ -81,7 +81,7 @@ middlewareObj.isStampGetAllowed = function(req, res, next) {
 			res.redirect("/");
 		} else {
 			//If the last stamp gotten (in the array at index .length - 1) has 
-			if(foundStamps[foundStamps.length - 1].requesting_time < Date.now() - 60000) {
+			if(!foundStamps.length && foundStamps[foundStamps.length - 1].requesting_time < Date.now() - 60000) {
 				console.log("A minute has passed since the last stamp get");
 				return next();
 			} else {
