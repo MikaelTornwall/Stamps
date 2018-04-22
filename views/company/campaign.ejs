@@ -5,24 +5,46 @@
 	<div class="col-sm-3">
 		<div class="card p-3">
 			<p class="campaign-title">
-				<strong><%= campaign.title %></strong>
+				<strong><%= campaign[0].title %></strong>
 			</p>
 			<span class="img-container">
-				<img src="<%= campaign.image %>" height="200" width="250">
+				<img src="<%= campaign[0].image %>" height="200" width="250">
 			</span>
 			<p><strong>Started by:</strong> <%= campaign[0].company.username%></p>
 			<p><strong>Description:</strong> <%= campaign[0].description %></p>
 			<p><strong>Start:</strong> <%= campaign[0].start_time %></p>
 			<p><strong>End:</strong> <%= campaign[0].end_time %></p>
 			<p><strong>Reward:</strong> <%= campaign[0].reward %></p>
-			<p><strong>Stamps needed:</strong> <%= campaign[0].stamps_needed %> </p>
+			<p><strong>Stamps needed:</strong> <%= campaign[0].stamps_needed %></p>
+			
+			<p><strong>Identifiers:</strong></p>
+			<ol>
+				<% for(var i = 0; i < campaign[0].identifiers.length; i++) { %>
+					<li><%= campaign[0].identifiers[i] %></li>
+				<% } %>
+			</ol>
+		</div>
+		<div class="card p-3">
+			<label for="identifier">Add new identifier</label>
+			<form class="form-inline" action="/admin/campaigns/<%= campaign[0].title %>/?_method=PUT" method="post">
+				<div class="form-group">
+					<input type="text" class="form-control" name="identifier" placeholder="Input identifier">
+					<input type="submit" class="form-control" value="Add">
+				</div>
+			</form>
 		</div>
 	</div>
 	
 	<div class="col-sm-6">
-		<div class="card p-3">
-		<h1>Insert analytics: Pie chart, popularity graph, etc niceties</h1>
-		</div>
+
+				<% for(var i = 0; i < campaign[0].identifiers.length; i++) { %>
+					<div class="card p-3">
+						<p><%= campaign[0].identifiers[i] %></p>
+						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png" height="200" width="200">
+						<p>TODO: Generate QR codes</p>
+					</div>
+				<% } %>
+
 	</div>
 
 	<div class="col-sm-3">

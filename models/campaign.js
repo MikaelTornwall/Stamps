@@ -8,15 +8,8 @@ var campaignSchema = new mongoose.Schema({
 	stamps_needed: Number,
 	description: String,
 	reward: String,
-	company: 
-		{
-			id: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: "User"
-			},
-			username: String
-		},
-	locations: [String]
+	company: String,
+	identifiers: [String]
 });
 
 module.exports = mongoose.model("Campaign", campaignSchema);

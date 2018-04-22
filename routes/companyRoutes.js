@@ -13,7 +13,7 @@ var middleware = require("../middleware/index.js");
 
 //get company page by username
 router.get("/admin", middleware.isAuthenticatedCompany, function(req,res){
-	Campaign.find({"user.username":req.params.username}, function(err, foundCampaigns) {
+	Campaign.find({company:req.user.username}, function(err, foundCampaigns) {
 		if(err) {
 			console.log("error retreiving campaigns");
 			req.flash("error","error retreiving campaigns");
@@ -50,8 +50,8 @@ router.post("/admin/campaigns", middleware.isAuthenticatedCompany, middleware.ca
 		description: req.body.description,
 		reward: req.body.reward,
 		stamps_needed: req.body.stamps,
-		company: req.user,
-		locations: []
+		company: req.user.username,
+		identifiers: []
 	};
 	Campaign.create(campaign, function(err, newCampaign) {
 		if(err) {
@@ -64,6 +64,25 @@ router.post("/admin/campaigns", middleware.isAuthenticatedCompany, middleware.ca
 			res.redirect("/admin/" + newCampaign.title);
 		}
 	})
+});
+
+router.put("/admin/campaigns/:campaign", middleware.isAuthenticatedCompany, function (req, res) {
+	Campaign.findOneAndUpdate({title:req.params.campaign}, 
+		{
+			$addToSet: {
+				identifiers: req.body.identifier
+			}
+		}, function(err, updatedCampaign) {
+		if(err) {
+			console.log("Failed to add identifier to campaign");
+			req.flash("error", "Failed to add identifier to campaign");
+			res.redirect("/admin");
+		} else {
+			console.log("Identifier added");
+			req.flash("success", "Identifier added");
+			res.redirect("/admin/" + req.params.campaign);
+		}
+	});
 });
 
 module.exports = router;

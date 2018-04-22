@@ -5,10 +5,10 @@
 	<div class="col-sm-6">
 		<div class="card p-3">
 			<p class="campaign-title">
-				<strong><%= campaign.title %></strong>
+				<strong><%= campaign[0].title %></strong>
 			</p>
 			<span class="img-container">
-				<img src="<%= campaign.image %>" height="200" width="250">
+				<img src="<%= campaign[0].image %>" height="200" width="250">
 			</span>
 			<p><strong>Started by:</strong> <%= campaign[0].company.username%></p>
 			<p><strong>Description:</strong> <%= campaign[0].description %></p>
