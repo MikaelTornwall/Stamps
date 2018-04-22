@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 <br>
 
-<form action="/stamp" id="get_stamp_form" method="GET">
+<form action="/stamp" id="get_stamp_form" method="POST">
 			<div class="invisible">
 			<input type="hidden" name="company" value="<%= campaign[0].company.username %>">
 			<input type="hidden" name="campaign" value="<%= campaign[0].title %>">
