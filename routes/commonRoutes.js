@@ -22,6 +22,7 @@ router.get("/", function(req,res){
 	res.render("common/index");
 });
 
+// router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExists, middleware.isStampGetAllowed, function(req,res){
 router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExists, middleware.isStampGetAllowed, function(req,res){
 	var stamp = {
 		id: 1,
