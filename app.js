@@ -18,19 +18,29 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
-// app.use(express.static(__dirname + "/public/"));
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
 
-// var url = process.env.DATABASEURL || "mongodb://localhost/stamps";
-var url = "mongodb://localhost/stamps";
+var url = process.env.DATABASEURL || "mongodb://localhost/stamps";
 mongoose.connect(url);
+
+//========================================================
+//MIDDLEWARE
+//========================================================
+
+app.use(function(req, res, next){
+	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	next();
+});
 
 var commonRoute = require("./routes/commonRoutes");
 var companyRoute = require("./routes/companyRoutes");
 var customerRoute = require("./routes/customerRoutes");
+
 app.use(commonRoute);
 app.use(companyRoute);
 app.use(customerRoute);

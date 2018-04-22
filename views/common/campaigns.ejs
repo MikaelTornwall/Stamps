@@ -16,21 +16,14 @@
 	<span class="img-container">
 		<img src="<%= campaigns[i].image %>" height="200" width="250">
 	</span>
-	<p>
-	<strong>Started by:</strong> <%= campaigns[i].company.username %>
-	<br>
-	<strong>Description:</strong> <%= campaigns[i].description %>
-	<br>
-	<strong>Start:</strong> <%= campaigns[i].start_time %>
-	<br>
-	<strong>End:</strong> <%= campaigns[i].end_time %>
-	<br>
-	<strong>Reward:</strong> <%= campaigns[i].reward %>
-	<br>
-	<strong>Stamps needed:</strong> <%= campaigns[i].stamps_needed %> 
-	<br>
-	<br>
-	</p></li>
+	<p><strong>Started by:</strong> <%= campaigns[i].company.username %></p>
+	<p><strong>Description:</strong> <%= campaigns[i].description %></p>
+	<p><strong>Start:</strong> <%= campaigns[i].start_time %></p>
+	<p><strong>End:</strong> <%= campaigns[i].end_time %></p>
+	<p><strong>Reward:</strong> <%= campaigns[i].reward %></p>
+	<p><strong>Stamps needed:</strong> <%= campaigns[i].stamps_needed %></p>
+	
+	</li>
 </div>
 <% } %>
 	<br>

@@ -4,26 +4,18 @@
 	<div class="col-sm-3"></div>
 	<div class="col-sm-6">
 		<div class="card p-3">
-			<h1><%= campaign.title %></h1>
-			<img src="<%= campaign.image %>" width="200px" height="200px">
-			<br>
-			<form action="/campaigns/<%= campaign.title %>" id="get_card_form" method="GET"></form>
-			<p>
-				Started by: <%= campaign.company %>
-				<br>
-				Description: <%= campaign.description %>
-				<br>
-				Start: <%= campaign.start_time %>
-				<br>
-				End: <%= campaign.end_time %>
-				<br>
-				Reward: <%= campaign.reward %>
-				<br>
-				Stamps needed: <%= campaign.stamps_needed %>
-				<br>
-				<br>
-				<input type="submit" class="btn btn-primary" form="get_card_form" value="Get Card">
+			<p class="campaign-title">
+				<strong><%= campaign.title %></strong>
 			</p>
+			<span class="img-container">
+				<img src="<%= campaign.image %>" height="200" width="250">
+			</span>
+			<p><strong>Started by:</strong> <%= campaign[0].company.username%></p>
+			<p><strong>Description:</strong> <%= campaign[0].description %></p>
+			<p><strong>Start:</strong> <%= campaign[0].start_time %></p>
+			<p><strong>End:</strong> <%= campaign[0].end_time %></p>
+			<p><strong>Reward:</strong> <%= campaign[0].reward %></p>
+			<p><strong>Stamps needed:</strong> <%= campaign[0].stamps_needed %> </p>
 		</div>
 	</div>
 	<div class="col-sm-3">

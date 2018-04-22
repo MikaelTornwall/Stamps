@@ -1,24 +1,58 @@
 <% include ../partials/header %>
 <br>
-<br>
-<div class="row">	
+<div class="row">
 	<div class="col-sm-3">
-			<div class="card p-3">
-		</div>
-	</div>
-
-	<div class="col-sm-6">
-		<div class="card p-3">
-
-		</div>
-	</div>
-
-	<div class="col-sm-3">
-		<div class="card p-3">
-			<p>user object for debugging: <%= user %></p>
+		<div class="list-group card p-3">
+			<h2>Campaigns</h2>
+			<br>
+			<ul>
+				<a href="/customer/" class="list-group-item">Profile</a>
+				<a href="/customer/circularmay" class="list-group-item">#CircularMay</a>
+			</ul>
 		</div>
 	</div>
 	
-</div>
+
+	<div class="col-sm-6">
+		<div class="card p-3">
+			<h1>My Stamps</h1>
+			<br>
+			<ul>
+			<% for(var i = 0; i < stamps.length; i++) { %>
+				<p class="list-group-item" style="color:black;">
+					<%= stamps[i].id %> | 
+					<%= stamps[i].company %> | 
+					<%= stamps[i].campaign %> | 
+					<%= stamps[i].identifier %> | 
+					<%= stamps[i].requesting_time %> | 
+					<%= stamps[i].granting_time %> | 
+				</p>
+			<% } %>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="col-sm-3">
+		<div class="card p-3">
+			<img src="<%= user.image %>" width="200px" height="200px">
+			<h1><%= user.username %></h1>
+			<ul>
+				<li><p><%= user.email %></p></li>
+			</ul>
+			<br>
+			<h1>Stamps: <%=/// stamps.length %></h1>
+			<br>
+		</div>
+	</div>
+	<div class="card p-3">
+		<p>user object for debugging: <%= user %></p>
+	</div>
+	<div class="card p-3">
+		<p>stamps object for debugging: <%= stamps %></p>
+	</div>
+<br>
+
+
+
 
 <% include ../partials/footer %>

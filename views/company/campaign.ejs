@@ -1,37 +1,38 @@
 <% include ../partials/header %>
-<%= user %>
 <br>
-<%= id %>
 <br>
-<%= campaign.requests %>
-<br>
+<div class="row">
+	<div class="col-sm-3">
+		<div class="card p-3">
+			<p class="campaign-title">
+				<strong><%= campaign.title %></strong>
+			</p>
+			<span class="img-container">
+				<img src="<%= campaign.image %>" height="200" width="250">
+			</span>
+			<p><strong>Started by:</strong> <%= campaign[0].company.username%></p>
+			<p><strong>Description:</strong> <%= campaign[0].description %></p>
+			<p><strong>Start:</strong> <%= campaign[0].start_time %></p>
+			<p><strong>End:</strong> <%= campaign[0].end_time %></p>
+			<p><strong>Reward:</strong> <%= campaign[0].reward %></p>
+			<p><strong>Stamps needed:</strong> <%= campaign[0].stamps_needed %> </p>
+		</div>
+	</div>
+	
+	<div class="col-sm-6">
+		<div class="card p-3">
+		<h1>Insert analytics: Pie chart, popularity graph, etc niceties</h1>
+		</div>
+	</div>
 
-<h2>Stamp requests</h2>
-
-<ol>
-<% for(var i = 0; i < campaign.requests.length; i++) { %>
-<li>
-<form method="POST" id="grant_stamp<%=i%>" action="/companies/<%= user._id %>/admin/campaigns/<%= campaign._id %>/stamps/<%= campaign.requests[i]._id %>/?_method=PUT"></form>
-
-#
-<%= campaign.title %> | 
-<%= campaign.requests[i].username %> | 
-<input type="submit" form="grant_stamp<%=i%>" value="Grant"> | 
-
-<button>Deny NOT IMPLEMENTED</button></li>
-<% } %>
-</ol>
-<br>
-
-
-<h2>Redeem requests</h2>
-
-<ol>
-<li>PLACEHOLDER#circularMay | Card number: 1 | <button>Redeem NOT IMPLEMENTED</button></li>
-</ol>
-<br>
-
-
+	<div class="col-sm-3">
+		<div class="card p-3">
+			<p>user object for debugging: <%= user %></p>
+		</div>
+		<br>
+		<div class="card p-3">
+			<p>campaign object for debugging: <%= campaign %></p>
+		</div>
+	</div>
+</div>
 <% include ../partials/footer %>
-
-

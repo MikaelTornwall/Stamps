@@ -1,16 +1,11 @@
 var express = require("express");
 var router = express.Router();
 var passport = require("passport");
+var middleware = require("../middleware/index.js");
 
 var User = require("../models/user");
 var Campaign = require("../models/campaign");
-
-router.use(function(req, res, next){
-	res.locals.currentUser = req.user;
-	res.locals.error = req.flash("error");
-	res.locals.success = req.flash("success");
-	next();
-});
+var Stamp = require("../models/stamp");
 
 //========================================================
 //HELPER FUNCTIONS
@@ -19,111 +14,33 @@ router.use(function(req, res, next){
 var CUSTOMER = true;
 var COMPANY = false;
 
-function dealWithError(err, param1, param2, param3) {
-	console.log("Error occurred when retreiving with following parameters: " + param1 + ", " + param2 + ", " + param3 + "\n");
-	console.log(err);
-	res.redirect("/");
-}
-
-function dealWithNothingFound(param1, param2, param3) {
-	console.log("Nothing found with following parameters: " + param1 + ", " + param2 + ", " + param3 + "\n");
-	res.render("common/notfound");
-}
-
-function getUsersAndRender(res, bool, filename) {
-	User.find({role:COMPANY}, function(err, allCompanies) {
-		if(err) {
-			dealWithError(err,bool,filename);
-		} else {
-			if(!allCompanies.length) {
-				dealWithNothingFound(bool);
-			} else {
-				console.log("RETREIVED ALL " + bool + " USERS");
-				res.render(filename, {companies:allCompanies});
-			}
-		}
-	});
-}
-
-function getUserByIdAndRender(res, id, filename) {
-	User.findById(id, function(err, foundCompany) {
-		if(err) {
-			dealWithError(err,id,filename);
-		} else {
-			if(!foundCompany) {
-				dealWithNothingFound(id);
-			} else {
-				console.log("RETREIVED " + id + " USER");
-				res.render(filename, {company:foundCompany});
-			}
-
-		}
-	});
-}
-function getCampaignsAndRender(res, filename) {
-	Campaign.find({}, function(err, allCampaigns) {
-		if(err) {
-			dealWithError(err,id,filename);
-		} else {
-			if(!allCampaigns.length) {
-				dealWithNothingFound(id);
-			} else {
-				console.log("RETREIVED ALL CAMPAIGNS");
-				res.render(filename, {campaigns:allCampaigns});
-			}
-		}
-	});
-}
-
-function getCampaignByIdAndRender(res, id, filename) {
-	Campaign.findById(id, function(err, foundCampaign) {
-		if(err) {
-			dealWithError(err,id,filename);
-		} else {
-			if(!foundCampaign) {
-				dealWithNothingFound(id);
-			} else {
-				console.log("RETREIVED " + id + " CAMPAIGN");
-				res.render(filename, {campaign:foundCampaign});
-			}
-		}
-	});
-}
-
-function getAllOfTypeAndRender(res, Schema, filename) {
-	Schema.find({}, function(err, retreived) {
-		if(err) {
-			dealWithError(err,filename);
-		} else {
-			if(!retreived) {
-				dealWithNothingFound();
-			} else {
-				console.log("RETREIVED ALL " + Schema + "S:\n");
-				console.log(retreived);
-				res.render(filename, {retreived:retreived});
-			}
-		}
-	});
-}
-
 //========================================================
 //BASIC ROUTES 
 //========================================================
 
-
-// router.get("/companies/", function(req,res) {
-// 	getUsersAndRender(res, COMPANY, "company/index");
-// 	//move to generic and parametrized functions next
-// 	// getAllOfTypeAndRender(res, User, "company/index");
-// });
-
-// router.get("/companies/:id", function(req,res){
-// 	getUserByIdAndRender(res, req.params.id, "company/profile")
-// });
-
-
 router.get("/", function(req,res){
 	res.render("common/index");
+});
+
+router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExists, middleware.isStampGetAllowed, function(req,res){
+	var stamp = {
+		id: 1,
+		company: req.body.company,
+		holder: req.user.username,
+		campaign: req.body.campaign,
+		requesting_time: Date.now(),
+		granting_time: null,
+		identifier: req.body.identifier
+	}
+	Stamp.create(stamp, function(err, newStamp) {
+		if(err) {
+			req.flash("error", "Stamp get failed");
+			res.redirect("/");
+		} else {
+			req.flash("success", "Successfully got stamp");
+			res.redirect("/customer/" + newStamp.campaign);
+		}
+	});
 });
 
 router.get("/campaigns", function(req,res){
@@ -155,11 +72,6 @@ router.get("/campaigns/:title", function(req,res) {
 	});
 });
 
-// router.get("/campaigns/:id", function(req,res) {
-// 	getCampaignByIdAndRender(res, req.params.id, "common/campaign");
-// });
-
-
 router.get("/login", function(req,res){
 	res.render("common/login");
 });
@@ -173,7 +85,7 @@ router.get("/business/auth", function(req,res){
 });
 
 router.post("/login/customer", passport.authenticate("local", {
-	successRedirect: "/customer",
+	successRedirect: "/customer/circularmay",
 	failureRedirect: "/login",
 	failureFlash: true
 }), function(req,res) {});
