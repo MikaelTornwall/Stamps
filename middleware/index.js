@@ -36,6 +36,8 @@ middlewareObj.companyExists = function(req, res, next) {
 		}
 	});
 }
+
+//doesnt seem to work??
 middlewareObj.campaignExists = function(req, res, next) {
 	var campaignTitle = req.body.campaign;
 	Campaign.find({title:campaignTitle}, function(err, foundCampaign) {

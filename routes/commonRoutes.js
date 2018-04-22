@@ -44,6 +44,28 @@ router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExi
 	});
 });
 
+router.get("/stamp/:company/:campaign/:identifier", middleware.isAuthenticatedCustomer, function(req,res){
+	var stamp = {
+		id: 1,
+		company: req.params.company,
+		holder: req.user.username,
+		campaign: req.params.campaign,
+		requesting_time: Date.now(),
+		granting_time: null,
+		identifier: req.params.identifier
+	}
+	Stamp.create(stamp, function(err, newStamp) {
+		if(err) {
+			req.flash("error", "Stamp get failed");
+			res.redirect("/");
+		} else {
+			req.flash("success", "Successfully got stamp");
+			res.redirect("/customer/" + newStamp.campaign);
+		}
+	});
+});
+
+
 router.get("/campaigns", function(req,res){
 	// getCampaignsAndRender(res, "common/campaigns");
 	Campaign.find({}, function(err, allCampaigns) {
