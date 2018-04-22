@@ -23,7 +23,7 @@ router.get("/", function(req,res){
 });
 
 // router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExists, middleware.isStampGetAllowed, function(req,res){
-router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExists, middleware.isStampGetAllowed, function(req,res){
+router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExists, function(req,res){
 	var stamp = {
 		id: 1,
 		company: req.body.company,
