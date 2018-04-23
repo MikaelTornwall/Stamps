@@ -108,7 +108,7 @@ router.get("/business/auth", function(req,res){
 	res.render("common/businessauth");
 });
 
-router.post("/login/customer", passport.authenticate("local"), function(req, res) {
+router.post("/login/customer", passport.authenticate("local", {failureRedirect: "/login", failureFlash: true}), function(req, res) {
 	if(!req.user) {
 		req.flash("error", "Issue signing up");
 		res.redirect("/login");
