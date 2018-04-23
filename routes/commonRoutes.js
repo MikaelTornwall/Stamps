@@ -157,30 +157,27 @@ router.post("/login/company", passport.authenticate("local", {
 
 router.post("/register/customer", function(req,res) {
 	var newCustomer = 
-		{
-			image: req.body.image,
-			username: req.body.username,
-			email: req.body.email,
-			role: true,
-			cards: [],
-			campaigns: null,
-			signup_time: Date.now()
-		};
+	{
+		image: req.body.image,
+		username: req.body.username,
+		email: req.body.email,
+		role: true,
+		cards: [],
+		campaigns: null,
+		signup_time: Date.now()
+	};
 	User.register(new User(newCustomer), req.body.password, function(err, user) {
 		if(err) {
 			console.log(err);
 			req.flash("error", err.message);
 			res.redirect("/register");
-		} else passport.authenticate("local"), function(req, res) {
-			if(!req.user) {
-				req.flash("error", "Issue logging in after registering");
-				res.redirect("/register");
-			} else {
+		} else {
+			passport.authenticate("local")(req, res, function() {
 				req.flash("success", "Logged in");
 				res.redirect(req.session.redirectTo || '/customer');
 				delete req.session.redirectTo;
 			}
-		};
+		)}
 	});
 });
 
