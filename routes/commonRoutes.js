@@ -108,12 +108,6 @@ router.get("/business/auth", function(req,res){
 	res.render("common/businessauth");
 });
 
-// router.post("/login/customer", passport.authenticate("local", {
-// 	successRedirect: "/customer/circularmay",
-// 	failureRedirect: "/login",
-// 	failureFlash: true
-// }), function(req,res) {});
-
 router.post("/login/customer", passport.authenticate("local"), function(req, res) {
 	if(!req.user) {
 		req.flash("error", "Issue signing up");
@@ -130,30 +124,6 @@ router.post("/login/company", passport.authenticate("local", {
 	failureRedirect: "/business/auth",
 	failureFlash: true
 }), function(req,res) {});
-
-
-
-// router.post("/register/customer", function(req,res) {
-// 	var newCustomer = 
-// 		{
-// 			image: req.body.image,
-// 			username: req.body.username,
-// 			email: req.body.email,
-// 			role: true,
-// 			cards: [],
-// 			campaigns: null,
-// 			signup_time: Date.now()
-// 		};
-// 	User.register(new User(newCustomer), req.body.password, function(err, user) {
-// 		if(err) {
-// 			console.log(err);
-// 			req.flash("error", err.message);
-// 			res.redirect("/register");
-// 		} else passport.authenticate("local") (req, res, function() {
-// 			res.redirect("/customer");
-// 		});
-// 	});
-// });
 
 router.post("/register/customer", function(req,res) {
 	var newCustomer = 
