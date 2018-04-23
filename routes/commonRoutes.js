@@ -117,7 +117,7 @@ router.get("/business/auth", function(req,res){
 router.post("/login/customer", passport.authenticate("local"), function(req, res) {
 	if(!req.user) {
 		req.flash("error", "Issue signing up");
-		res.redirect(req.session.redirectTo);
+		res.redirect("/login");
 	} else {
 		req.flash("success", "Logged in");
 		res.redirect(req.session.redirectTo || '/customer/circularmay');
@@ -174,7 +174,7 @@ router.post("/register/customer", function(req,res) {
 		} else passport.authenticate("local"), function(req, res) {
 			if(!req.user) {
 				req.flash("error", "Issue logging in after registering");
-				res.redirect(req.session.redirectTo);
+				res.redirect("/register");
 			} else {
 				req.flash("success", "Logged in");
 				res.redirect(req.session.redirectTo || '/customer');
