@@ -44,6 +44,7 @@ router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExi
 	});
 });
 
+//TODO: reimplement middleware.campaignExists, there may have been an issue with it
 router.get("/stamp/:company/:campaign/:identifier", middleware.isAuthenticatedCustomer, function(req,res){
 	var stamp = {
 		id: 1,
@@ -107,11 +108,22 @@ router.get("/business/auth", function(req,res){
 	res.render("common/businessauth");
 });
 
-router.post("/login/customer", passport.authenticate("local", {
-	successRedirect: "/customer/circularmay",
-	failureRedirect: "/login",
-	failureFlash: true
-}), function(req,res) {});
+// router.post("/login/customer", passport.authenticate("local", {
+// 	successRedirect: "/customer/circularmay",
+// 	failureRedirect: "/login",
+// 	failureFlash: true
+// }), function(req,res) {});
+
+router.post("/login/customer", passport.authenticate("local"), function(req, res) {
+	if(!req.user) {
+		req.flash("error", "Issue signing up");
+		res.redirect(req.session.redirectTo);
+	} else {
+		req.flash("success", "Logged in");
+		res.redirect(req.session.redirectTo || '/customer/circularmay');
+		delete req.session.redirectTo;
+	}
+});
 
 router.post("/login/company", passport.authenticate("local", {
 	successRedirect: "/admin",

@@ -6,6 +6,7 @@ middlewareObj.isAuthenticatedCustomer = function (req,res,next) {
 	if(req.isAuthenticated() && req.user.role) {
 		return next();
 	}
+	req.session.redirectTo = req.path;
 	req.flash("error", "Please login first");
 	res.redirect("/login");
 }
