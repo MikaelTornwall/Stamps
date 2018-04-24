@@ -1,5 +1,6 @@
 var middlewareObj = {};
 var Campaign = require("../models/campaign");
+var User = require("../models/user");
 var Stamp = require("../models/stamp");
 
 middlewareObj.isAuthenticatedCustomer = function (req,res,next) {
@@ -20,8 +21,8 @@ middlewareObj.isAuthenticatedCompany = function(req,res,next) {
 }
 
 middlewareObj.companyExists = function(req, res, next) {
-	var companyName = req.body.company;
-	Company.find({username:companyName}, function(err, foundCompany) {
+	var companyName = req.body.company || req.params.company;
+	User.find({username:companyName}, function(err, foundCompany) {
 		if(err) {
 			console.log("error retreiving company");
 			req.flash("error", "Company " + companyName + " does not exist");
@@ -38,17 +39,17 @@ middlewareObj.companyExists = function(req, res, next) {
 	});
 }
 
-//doesnt seem to work??
+//Probably doesn't work
 middlewareObj.campaignExists = function(req, res, next) {
-	var campaignTitle = req.body.campaign;
-	Campaign.find({title:campaignTitle}, function(err, foundCampaign) {
+	var campaign = req.body.campaign || req.params.campaign;
+	Campaign.find({title:campaign}, function(err, foundCampaign) {
 		if(err) {
 			console.log("error retreiving campaign");
-			req.flash("error", "Campaign " + campaignTitle + " does not exist");
+			req.flash("error", "Campaign " + campaign + " does not exist");
 			res.redirect("/campaigns");
 		} else {
-			if(!foundCampaign.length) {
-				req.flash("error", "Campaign " + campaignTitle + " does not exist");
+			if(foundCampaign && !foundCampaign.length) {
+				req.flash("error", "Campaign " + campaign + " does not exist");
 				res.redirect("/campaigns");
 			} else {
 				console.log("campaigns retreived");
@@ -94,6 +95,69 @@ middlewareObj.isStampGetAllowed = function(req, res, next) {
 			}
 		}
 	});
+}
+
+middlewareObj.checkStampGetValidity = function(req, res, next) {
+	Stamp.find({holder:req.user.username}, function(err, foundStamps) {
+		if(err) {
+			res.redirect("/");
+		} else {
+			//If the last stamp gotten (in the array at index .length - 1) has 
+			if(foundStamps && foundStamps.length) {
+				if(foundStamps[foundStamps.length - 1].requesting_time < Date.now() - 5000) {
+					console.log("A minute has passed since the last stamp get");
+					return next();
+				} else {
+					console.log("You have already collected your stamp!");
+					req.flash("error", "You have already collected your stamp!");
+					res.redirect("/customer/recent");
+				}
+			} else {
+				console.log("No stamps found: new customer?");
+				return next();
+			}
+		}
+	});
+}
+
+middlewareObj.redemptionValid = function(req, res, next) {
+	Campaign.find({title:req.params.campaign}, function(err, foundCampaign) {
+		if(err) {
+			console.log("error retreiving campaign");
+			req.flash("error", "Error finding the campaign");
+			res.redirect("/campaigns");
+		} else if(!foundCampaign.length) {
+			console.log("no campaigns found");
+			req.flash("error", "Campaign not found");
+			res.redirect("/campaigns")
+		} else {
+			console.log("campaigns retreived");
+			Stamp.find({holder:req.user.username, campaign:req.params.campaign, granting_time:null}, function(err, foundStamps) {
+				if(err) {
+					req.flash("error", "Not redeemable");
+					console.log("not redeemable");
+					res.redirect("/customer/" + req.params.campaign);
+				} else {
+					if(foundStamps.length >= foundCampaign[0].stamps_needed) {
+						return next();
+					}
+				}
+			});
+		}
+	});
+}
+
+
+
+middlewareObj.stickyFlash = function(req, res, next) {
+	console.log(res.locals);
+	if(res.locals.success && res.locals.success.length) {
+		req.flash("success", res.locals.success);
+	}
+	if(res.locals.error && res.locals.error.length) {
+		req.flash("error", res.locals.error);
+	}
+	return next();
 }
 
 module.exports = middlewareObj;

@@ -22,7 +22,7 @@ router.get("/", function(req,res){
 	res.render("common/index");
 });
 
-// router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExists, middleware.isStampGetAllowed, function(req,res){
+//Needs to be disabled
 router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExists, function(req,res){
 	var stamp = {
 		id: 1,
@@ -45,7 +45,13 @@ router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExi
 });
 
 //TODO: reimplement middleware.campaignExists, there may have been an issue with it
-router.get("/stamp/:company/:campaign/:identifier", middleware.isAuthenticatedCustomer, function(req,res){
+//DO NOT BREAK THIS ROUTE!!! IN ACTUAL BUSINESS USE
+router.get("/stamp/:company/:campaign/:identifier", 
+	middleware.isAuthenticatedCustomer,
+	middleware.companyExists,
+	middleware.campaignExists,
+	middleware.checkStampGetValidity, 
+	function(req,res) {
 	var stamp = {
 		id: 1,
 		company: req.params.company,
@@ -114,7 +120,7 @@ router.post("/login/customer", passport.authenticate("local", {failureRedirect: 
 		res.redirect("/login");
 	} else {
 		req.flash("success", "Logged in");
-		res.redirect(req.session.redirectTo || '/customer/circularmay');
+		res.redirect(req.session.redirectTo || '/customer/recent');
 		delete req.session.redirectTo;
 	}
 });
@@ -144,7 +150,7 @@ router.post("/register/customer", function(req,res) {
 		} else {
 			passport.authenticate("local")(req, res, function() {
 				req.flash("success", "Logged in");
-				res.redirect(req.session.redirectTo || '/customer');
+				res.redirect(req.session.redirectTo || '/customer/recent');
 				delete req.session.redirectTo;
 			}
 		)}

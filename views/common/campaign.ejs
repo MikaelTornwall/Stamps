@@ -16,7 +16,7 @@
 			<p><strong>End:</strong> <%= campaign[0].end_time %></p>
 			<p><strong>Reward:</strong> <%= campaign[0].reward %></p>
 			<p><strong>Stamps needed:</strong> <%= campaign[0].stamps_needed %></p>
-			<input type="submit" class="btn btn-primary" form="get_stamp_form" value="Get Stamp">
+			<a href="/customer/<%= campaign[0].title %>" type="submit" class="btn btn-primary" form="show_card">Show</a>
 		</div>
 	</div>
 	<div class="col-sm-3">
@@ -27,12 +27,6 @@
 </div>
 
 
-<form action="/stamp" id="get_stamp_form" method="POST">
-	<div class="invisible">
-		<input type="hidden" name="company" value="<%= campaign[0].company.username %>">
-		<input type="hidden" name="campaign" value="<%= campaign[0].title %>">
-		<input type="hidden" name="identifier" value="Olivia">
-	</div>
-</form>
+<form action="/customer/<%= campaign[0].title %>" id="show_cardnot" method="get"></form>
 
 <% include ../partials/footer %>
