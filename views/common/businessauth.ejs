@@ -5,8 +5,7 @@
 	<div class="col-sm-6">
 		<div class="card p-3">
 			<h2 class="login-heading">Login</h2>
-			<div class="login">
-				<span>
+			<div class="#">
 					<form action="/login/company" method="post">
 						<div class="form-group">
 							<label for="username">Username</label>
@@ -18,16 +17,9 @@
 						</div>
 						<input type="submit" class="btn btn-primary" value="Log In">
 					</form>
-				</span>
-			</div>
-		</div>
-	</div>
 
-	<div class="col-sm-6">
-		<div class="card p-3">
-			<h2 class="login-heading">Register Business</h2>
-			<div class="login register">
-				<span>
+			<h4 class="login-heading mt-5">Or register here:</h4>
+			<div class="register">
 					<form action="/register/company" method="post">
 						<div class="form-group">
 							<label for="image">Image URL</label>
@@ -51,9 +43,9 @@
 						</div>
 						<input type="submit" class="btn btn-primary" value="Sign up">
 					</form>
-				</span>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <% include ../partials/footer %>
