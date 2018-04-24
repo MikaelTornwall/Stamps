@@ -221,7 +221,8 @@ a.login {
 /* CUSTOMER */
 /* Cards */
 .stamp-card {
-  background: linear-gradient(#3FBFBFA1, #3FBFBFA1, #BF3FBFA1, #3F3FBFA1, #3FBFBFA1);
+  background: linear-gradient(#6AA5D2A1, #3FBFBFA1, #005F92A1, #6AA5D2A1, #3FBFBFA1);
+  box-shadow: 0 3px 5px rgba(36, 31, 32, .3);
 }
 
 .stamp-position {
@@ -230,7 +231,7 @@ a.login {
 
 .fa-coffee {
   font-size: 2rem;
-  color: #12FFA1;
+  color: white;
 }
 
 /* Profile */
