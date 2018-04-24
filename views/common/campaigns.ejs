@@ -1,13 +1,11 @@
 <% include ../partials/header %>
 
-<div class="campaigns row">
+<div class="fitscreen row">
 	<div class="col-sm-3"></div>
-	<div class="col-sm-6">
-<h1 class="campaign-heading pt-3">All Campaigns:</h1>
-<ul>
+	<div class="col-sm-6 pt-5">
+<h1 class="campaign-heading">All Campaigns:</h1>
 <% for(var i = 0; i < campaigns.length; i++) { %>
-<div class="campaign-bg">
-	<li>
+<div class="d-flex justify-content-center pt-5">
 	<a class="view-link campaign-title" href="/campaigns/<%= campaigns[i].title %>">
 		<p class="campaign-title">
 			<strong><%= campaigns[i].title %></strong>
@@ -16,19 +14,8 @@
 	<span class="img-container">
 		<img src="<%= campaigns[i].image %>" height="200" width="250">
 	</span>
-	<p><strong>Started by:</strong> <%= campaigns[i].company.username %></p>
-	<p><strong>Description:</strong> <%= campaigns[i].description %></p>
-	<p><strong>Start:</strong> <%= campaigns[i].start_time %></p>
-	<p><strong>End:</strong> <%= campaigns[i].end_time %></p>
-	<p><strong>Reward:</strong> <%= campaigns[i].reward %></p>
-	<p><strong>Stamps needed:</strong> <%= campaigns[i].stamps_needed %></p>
-	
-	</li>
 </div>
 <% } %>
-	<br>
-
-</ul>
 
 </div>
 </div>
