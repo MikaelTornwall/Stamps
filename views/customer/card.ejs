@@ -12,21 +12,25 @@
 
 <div class="row">
 	<div class="col-sm-3"></div>
-	<div class="col-sm-6">
-		<div class="card p-3">
-			<h1>#<%= campaign[0].title %></h1>
+	<div class="col-sm-6 stamp-position">
+
+		<div class="stamp-card p-4">
+
+			<h3 class="stamping-logo">#<%= campaign[0].title %></h3>
 			<!-- TÄMÄN SAA JA PITÄÄKIN KORVATA OMALLA TOTEUTUKSELLA. -->
-			<table style="border: 1px solid black; border-collapse: collapse;">
+<div class="d-flex justify-content-center">
+
+			<table style="border: 3px solid white; border-collapse: collapse;">
 				<% for(var i = 0; i < campaign[0].stamps_needed; i++) { %>
 					<% if((i % 2) === 0) { %>
 					<tr>
-						<td style="border: 1px solid black;  width:100px; height:100px;">
+						<td class="stamp-position" style="border: 3px solid white;  width:100px; height:100px;">
 						<% if(i < stamps.length % campaign[0].stamps_needed) { %>
 							<i class="fas fa-coffee"></i>
 						<% } %>
 						</td>
 					<% } else { %>
-						<td style="border: 1px solid black;  width:100px; height:100px;">
+						<td class="stamp-position" style="border: 3px solid white;  width:100px; height:100px;">
 						<% if(i < stamps.length % campaign[0].stamps_needed) { %>
 							<i class="fas fa-coffee"></i>
 						<% } %>
@@ -35,8 +39,8 @@
 					<% } %>
 				<% } %>
 			</table>
-
-			<br>
+</div>
+<br>
 			<div class="row">
 				<div class="col-sm-6">
 					<input type="submit" class="btn btn-primary" form="get_stamp_form" value="Get Stamp">
@@ -49,6 +53,8 @@
 				</div>
 			</div>
 		</div>
+<br>
+<br>
 	</div>
 	<div class="col-sm-3">
 		<div class="card p-3">
@@ -61,6 +67,8 @@
 			<p>stamps object for debugging: <%= stamps %></p>
 		</div>
 	</div>
+
+
 </div>
 
 
