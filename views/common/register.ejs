@@ -10,14 +10,17 @@
 			<h2 class="login-heading">Customer registration</h2>
 			<div class="login register">
 				<span>
-					<form action="/register/customer" method="post">
+					<form data-toggle="validator" action="/register/customer" method="post">
 						<div class="form-group">
 							<label for="username">Username</label>
 							<input type="text" class="form-control" name="username" placeholder="Username" required>
 							<label class="pt-2" for="username">Email</label>
-							<input type="text" class="form-control" name="email" placeholder="example@gmail.com" required>
+							<input type="email" class="form-control" name="email" placeholder="example@gmail.com" data-error="Email needs to of form: example@gmail.com" required>
 							<label class="pt-2" for="password">Password</label>
-							<input type="password" class="form-control" name="password" placeholder="Password" required>
+							<div class="input-group-prepend">
+      							<div class="input-group-text" onmouseover="document.getElementById('inputPassword').type='text'" onmouseout="document.getElementById('inputPassword').type='password'"><i class="fas fa-eye"></i></div>
+							<input type="password" class="form-control" name="password" placeholder="password" id="inputPassword"  required>
+							</div>
 						</div>
 						<input type="submit" class="btn mt-2" value="Sign up">
 					</form>
