@@ -141,7 +141,6 @@ router.post("/login/company", middleware.usernameToLowerCase, passport.authentic
 router.post("/register/customer", middleware.usernameToLowerCase, function(req,res) {
 	var newCustomer = 
 	{
-		image: req.body.image,
 		username: req.body.username,
 		email: req.body.email,
 		role: true,
@@ -167,7 +166,6 @@ router.post("/register/customer", middleware.usernameToLowerCase, function(req,r
 router.post("/register/company", middleware.usernameToLowerCase, function(req,res){
 	var newCompany = 
 		{
-			image: req.body.image,
 			username: req.body.username,
 			email: req.body.email,
 			role: false,
