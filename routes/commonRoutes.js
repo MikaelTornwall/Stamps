@@ -114,7 +114,7 @@ router.get("/business/auth", function(req,res){
 	res.render("common/businessauth");
 });
 
-router.post("/login/customer", passport.authenticate("local", {failureRedirect: "/login", failureFlash: true}), function(req, res) {
+router.post("/login/customer", middleware.usernameToLowerCase, passport.authenticate("local", {failureRedirect: "/login", failureFlash: true}), function(req, res) {
 	if(!req.user) {
 		req.flash("error", "Issue signing up");
 		res.redirect("/login");
@@ -125,13 +125,13 @@ router.post("/login/customer", passport.authenticate("local", {failureRedirect: 
 	}
 });
 
-router.post("/login/company", passport.authenticate("local", {
+router.post("/login/company", middleware.usernameToLowerCase, passport.authenticate("local", {
 	successRedirect: "/admin",
 	failureRedirect: "/business/auth",
 	failureFlash: true
 }), function(req,res) {});
 
-router.post("/register/customer", function(req,res) {
+router.post("/register/customer", middleware.usernameToLowerCase, function(req,res) {
 	var newCustomer = 
 	{
 		image: req.body.image,
@@ -157,7 +157,7 @@ router.post("/register/customer", function(req,res) {
 	});
 });
 
-router.post("/register/company", function(req,res){
+router.post("/register/company", middleware.usernameToLowerCase, function(req,res){
 	var newCompany = 
 		{
 			image: req.body.image,

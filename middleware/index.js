@@ -160,4 +160,9 @@ middlewareObj.stickyFlash = function(req, res, next) {
 	return next();
 }
 
+middlewareObj.usernameToLowerCase = function(req, res, next){
+    req.body.username = req.body.username.toLowerCase();
+    next();
+}
+
 module.exports = middlewareObj;
