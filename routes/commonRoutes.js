@@ -18,8 +18,9 @@ var COMPANY = false;
 //BASIC ROUTES 
 //========================================================
 
-router.get("/", function(req,res){
-	res.render("common/index");
+router.get("/", middleware.stickyFlash, function(req,res){
+	res.redirect("/login");
+	// res.render("common/index");
 });
 
 //Needs to be disabled
@@ -103,7 +104,13 @@ router.get("/campaigns/:title", function(req,res) {
 });
 
 router.get("/login", function(req,res){
-	res.render("common/login");
+	if(!req.user) {
+		res.render("common/login");
+	} else if(req.user.role){
+		res.redirect(req.session.redirectTo || "/customer/recent");
+	} else {
+		res.redirect("/admin");
+	}
 });
 
 router.get("/register", function(req,res){
