@@ -60,6 +60,7 @@ ul {
 
 .stamping-logo {
   font-family: 'Luna', cursive;
+  font-size: .7rem !important;
 }
 .container-fluid {
   background-color: rgba(0, 95, 146, 0.2);
@@ -93,7 +94,7 @@ ul {
 .fa-bars:hover,
 .fa-bars:focus,
 .fa-bars:active {
-  color: rgba(255, 255, 255);
+  color: rgba(255, 255, 255, 1);
 }
 
 /* Footer */
@@ -243,14 +244,12 @@ a.login {
   height: 100vh;
   color: rgba(255, 255, 255, 1);
   display: flex;
-  text-align: center;
   justify-content: center;
   align-items: center;
 }
 
 .stamping-title {
   font-family: 'Luna', cursive;
-  font-size: 3.5rem;
   text-align: center;
 }
 
