@@ -3,7 +3,6 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var mongooseTypeEmail = require("mongoose-type-email");
 
 var userSchema = new mongoose.Schema({
-	image: String,
 	username: String,
 	password: String,
 	email: mongoose.SchemaTypes.Email,
