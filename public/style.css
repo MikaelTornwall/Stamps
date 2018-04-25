@@ -243,9 +243,6 @@ a.login {
 .stamping {
   height: 100vh;
   color: rgba(255, 255, 255, 1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .stamping-title {
