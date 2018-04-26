@@ -34,19 +34,18 @@ router.get("/customer", middleware.isAuthenticatedCustomer, function(req,res){
 	}
 });
 
+/*
+Find the latest stamp and redirect to the campaign of that stamp
+If no stamps are found, redirect to the campaigns list page instead
+*/
 router.get("/customer/recent", middleware.isAuthenticatedCustomer, middleware.stickyFlash, function(req,res){
 	Stamp.find({holder:req.user.username}, function(err, foundStamps) {
-		if(err) {
-			console.log("error retreiving stamps");
-			res.redirect("/");
+		if(err || !foundStamps.length) {
+			console.log("No stamps found, probably new customer");
+			res.redirect("/campaigns");
 		} else {
-			if(!foundStamps.length) {
-				console.log("No stamps found. New customer?");
-				res.redirect("/");
-			} else {
-				console.log("stamps retreived");
-				res.redirect("/customer/" + foundStamps[foundStamps.length - 1].campaign);
-			}
+			console.log("stamps retreived");
+			res.redirect("/customer/" + foundStamps[foundStamps.length - 1].campaign);
 		}
 	});
 });

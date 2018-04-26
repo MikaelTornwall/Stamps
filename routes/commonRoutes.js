@@ -19,8 +19,14 @@ var COMPANY = false;
 //========================================================
 
 router.get("/", middleware.stickyFlash, function(req,res){
-	res.redirect("/login");
-	// res.render("common/index");
+	if(!req.user) {
+		res.redirect("/login");
+	} else if(req.user.role) {
+		res.redirect("/customer/recent");
+	} else {
+		res.redirect("/admin");
+	}
+	
 });
 
 //Needs to be disabled
