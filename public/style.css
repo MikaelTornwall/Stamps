@@ -6,8 +6,8 @@
 }
 
 html {
-  height: 100vh;
   font-size: 16px;
+  height: 100vh;
 }
 
 body {
@@ -74,12 +74,7 @@ ul {
   background-image: url('/img/Sea_photo.jpeg');
   background-size: cover;
   background-attachment: fixed;
-  position: static;
   z-index: -99;
-}
-
-.fitscreen {
-  height: 100vh;
 }
 
 .navbar {
@@ -101,15 +96,29 @@ ul {
 
 footer {
   background-color: rgba(0, 95, 146, 1);
-  height: 15rem;
-  text-align: center;
-  padding: 2rem;
+  color: rgba(255, 255, 255, 1);
 }
 
-.footer-content {
-
+.contact-info {
+  color: rgba(106, 165, 210, 1);
+  margin: 1rem 0 2rem 0;
 }
 
+.icon {
+  color: rgba(106, 165, 210, 1);
+  font-size: 2rem;
+  margin: .4rem;
+}
+
+.icon:hover,
+.icon:active,
+.icon:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+.copyright {
+  color: rgba(106, 165, 210, 1);
+}
 /* *********************************************************************** */
 /* COMMON */
 /* Campaign */
@@ -132,27 +141,6 @@ footer {
   width: 250px;
   /* Has to be kept same as image dimensions */
   background-color: rgba(36, 31, 32, .5);
-}
-
-.campaign-title:hover {
-  background-color: rgba(36, 31, 32, .2);
-}
-
-
-.img-container {
-    height: 200px;
-    width: 250px;
-    display: inline-block;
-    overflow: hidden;
-}
-
-img.container img.campaigns {
-  width: 100%;
-}
-
-img.campaigns {
-  display: inline;
-
 }
 
 .campaign-bg {
@@ -241,23 +229,10 @@ a.login {
 /* PAGES */
 /* Stamping */
 .stamping {
-  height: 100vh;
   color: rgba(255, 255, 255, 1);
 }
 
 .stamping-title {
   font-family: 'Luna', cursive;
   text-align: center;
-}
-
-.icon {
-  color: rgba(106, 165, 210, 1);
-  font-size: 2rem;
-  margin-left: 1rem;
-}
-
-.icon:hover,
-.icon:active,
-.icon:focus {
-  color: rgba(255, 255, 255, 1);
 }
