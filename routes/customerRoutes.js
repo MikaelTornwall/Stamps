@@ -78,6 +78,7 @@ router.get("/customer/:campaign", middleware.isAuthenticatedCustomer, function(r
 router.get("/customer/:campaign/redeem",
 middleware.isAuthenticatedCustomer,
 middleware.campaignExists,
+middleware.campaignIsActive,
 middleware.redemptionValid,
 function(req,res){
 	console.log("Attempting to redeem");
