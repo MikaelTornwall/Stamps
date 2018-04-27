@@ -147,14 +147,13 @@ middlewareObj.campaignIsActive = function(req, res, next) {
 			if(start > now) {
 				req.flash("error","Campaign has not started yet");
 				res.redirect("/customer/" + req.params.campaign);
-			else if(end + 86400000 < now) {
+			} else if(end + 86400000 < now) {
 				req.flash("error","Campaign has ended");
 				res.redirect("/customer/" + req.params.campaign);
 			} else {
 				return next();
 			}
 		}
-	}
 	});
 }
 
