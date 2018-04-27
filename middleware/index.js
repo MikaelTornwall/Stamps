@@ -136,15 +136,25 @@ middlewareObj.campaignIsActive = function(req, res, next) {
 			req.flash("error", "Campaign not found");
 			res.redirect("/campaigns")
 		} else {
+			var start = foundCampaign.start_time;
+			var end = foundCampaign.end_time;
+			var now = Date.now();
 			console.log("campaigns retreived");
+			console.log("Start time: " + start);
+			console.log("Now: " + now);
+			console.log("End time: " + end);
 			//end time is the beginning of the last day. to make that day still valid, + milliseconds in day
-			if(foundCampaign.start_time < Date.now() && foundCampaign.end_time  + 86400000 > Date.now()) {
-				return next();
-			} else {
-				req.flash("error","Campaign is currently not ongoing");
+			if(start > now) {
+				req.flash("error","Campaign has not started yet");
 				res.redirect("/customer/" + req.params.campaign);
+			else if(end + 86400000 < now) {
+				req.flash("error","Campaign has ended");
+				res.redirect("/customer/" + req.params.campaign);
+			} else {
+				return next();
 			}
 		}
+	}
 	});
 }
 
