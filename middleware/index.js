@@ -79,6 +79,7 @@ middlewareObj.campaignNameAvailable = function(req, res, next) {
 	});
 }
 
+//NOT USED ANYWHERE?? if so then remove
 middlewareObj.isStampGetAllowed = function(req, res, next) {
 	Stamp.find({holder:req.user.username}, function(err, foundStamps) {
 		if(err) {
@@ -96,7 +97,11 @@ middlewareObj.isStampGetAllowed = function(req, res, next) {
 		}
 	});
 }
-
+/*
+Stamps can only be collected: 
+	-in the activity frame of the campaign
+	-if enough time has passed since the previous stamp get
+*/
 middlewareObj.checkStampGetValidity = function(req, res, next) {
 	Stamp.find({holder:req.user.username}, function(err, foundStamps) {
 		if(err) {
@@ -115,6 +120,29 @@ middlewareObj.checkStampGetValidity = function(req, res, next) {
 			} else {
 				console.log("No stamps found: new customer?");
 				return next();
+			}
+		}
+	});
+}
+
+middlewareObj.campaignIsActive = function(req, res, next) {
+	Campaign.findOne({title:req.params.campaign}, function(err, foundCampaign) {
+		if(err) {
+			console.log("error retreiving campaign");
+			req.flash("error", "Error finding the campaign");
+			res.redirect("/campaigns");
+		} else if(!foundCampaign) {
+			console.log("no campaigns found");
+			req.flash("error", "Campaign not found");
+			res.redirect("/campaigns")
+		} else {
+			console.log("campaigns retreived");
+			//end time is the beginning of the last day. to make that day still valid, + milliseconds in day
+			if(foundCampaign.start_time < Date.now() && foundCampaign.end_time  + 86400000 > Date.now()) {
+				return next();
+			} else {
+				req.flash("error","Campaign is currently not ongoing");
+				res.redirect("/customer/" + req.params.campaign);
 			}
 		}
 	});

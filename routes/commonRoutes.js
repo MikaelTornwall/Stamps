@@ -31,24 +31,29 @@ router.get("/", middleware.stickyFlash, function(req,res){
 
 //Needs to be disabled
 router.post("/stamp", middleware.isAuthenticatedCustomer, middleware.campaignExists, function(req,res){
-	var stamp = {
-		id: 1,
-		company: req.body.company,
-		holder: req.user.username,
-		campaign: req.body.campaign,
-		requesting_time: Date.now(),
-		granting_time: null,
-		identifier: req.body.identifier
-	}
-	Stamp.create(stamp, function(err, newStamp) {
-		if(err) {
-			req.flash("error", "Stamp get failed");
-			res.redirect("/");
-		} else {
-			req.flash("success", "Successfully got stamp");
-			res.redirect("/customer/" + newStamp.campaign);
+	var DISABLED = true;
+	if(DISABLED) {
+		res.redirect("/");
+	} else {
+		var stamp = {
+			id: 1,
+			company: req.body.company,
+			holder: req.user.username,
+			campaign: req.body.campaign,
+			requesting_time: Date.now(),
+			granting_time: null,
+			identifier: req.body.identifier
 		}
-	});
+		Stamp.create(stamp, function(err, newStamp) {
+			if(err) {
+				req.flash("error", "Stamp get failed");
+				res.redirect("/");
+			} else {
+				req.flash("success", "Successfully got stamp");
+				res.redirect("/customer/" + newStamp.campaign);
+			}
+		});
+	}
 });
 
 //TODO: reimplement middleware.campaignExists, there may have been an issue with it
