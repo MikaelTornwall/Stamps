@@ -3,20 +3,20 @@
 <div class="fitscreen row">
 	<div class="col-sm-3"></div>
 	<div class="col-sm-6 pt-5">
-<h1 class="campaign-heading">All Campaigns:</h1>
-<% for(var i = 0; i < campaigns.length; i++) { %>
-<div class="d-flex justify-content-center pt-5">
-	<a class="view-link campaign-title" href="/campaigns/<%= campaigns[i].title %>">
-		<p class="campaign-title">
-			<strong><%= campaigns[i].title %></strong>
-		</p>
-	</a>
-	<span class="img-container">
-		<img src="<%= campaigns[i].image %>" height="200" width="250">
-	</span>
+		<h1 class="campaign-heading">All Campaigns:</h1>
+		<% for(var i = 0; i < campaigns.length; i++) { %>
+		<div class="d-flex justify-content-center pt-5">
+			<a class="view-link campaign-title" href="/campaigns/<%= campaigns[i].title %>">
+				<p class="campaign-title">
+					<strong><%= campaigns[i].title %></strong>
+				</p>
+			</a>
+			<span class="img-container">
+				<img src="<%= campaigns[i].image %>" height="200" width="250">
+			</span>
+		</div>
+		<% } %>
+	</div>
 </div>
-<% } %>
 
-</div>
-</div>
 <% include ../partials/footer %>

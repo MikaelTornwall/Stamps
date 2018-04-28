@@ -40,19 +40,20 @@
 			<div class="card p-3">
 				<p><%= campaign[0].identifiers[i] %></p>
 				<img src="/images/<%= i + 1 %>.png" height="200" width="200">
-				<p>TODO: Generate QR codes</p>
+				<p>TODO: Automate QR code generation</p>
 			</div>
 		<% } %>
 	</div>
-
+<!--
 	<div class="col-sm-3">
 		<div class="card p-3">
-			<p>user object for debugging: <%= user %></p>
+			<p>user object for debugging: <%= //user %></p>
 		</div>
 		<br>
 		<div class="card p-3">
-			<p>campaign object for debugging: <%= campaign %></p>
+			<p>campaign object for debugging: <%= //campaign %></p>
 		</div>
 	</div>
+	-->
 </div>
 <% include ../partials/footer %>

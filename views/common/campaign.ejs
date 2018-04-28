@@ -1,5 +1,5 @@
 <% include ../partials/header %>
-<br>
+
 <div class="row">
 	<div class="col-sm-3"></div>
 	<div class="col-sm-6 pt-5">
@@ -19,14 +19,13 @@
 			<a href="/customer/<%= campaign[0].title %>" type="submit" class="btn btn-primary" form="show_card">Show</a>
 		</div>
 	</div>
+	<!--
 	<div class="col-sm-3">
 		<div class="card p-3">
-			<p>campaign object for debugging: <%= campaign %></p>
+			<p>campaign object for debugging: <%= //campaign %></p>
 		</div>
 	</div>
+	-->
 </div>
-
-
-<form action="/customer/<%= campaign[0].title %>" id="show_cardnot" method="get"></form>
 
 <% include ../partials/footer %>
