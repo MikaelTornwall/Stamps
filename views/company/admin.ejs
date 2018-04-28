@@ -19,40 +19,56 @@
 			<form action="/admin/campaigns" id="newcampaign"  method="POST">
 				<div class="form-group">
 					<label for="title">Title</label>
-					<input type="text" class="form-control" name="title" placeholder="insert title" required>
+					<input type="text" class="form-control" name="campaign[title]" placeholder="insert title" required>
+					<small id="titleTip" class="form-text text-muted">The title of the campaign will be visible to users at almost all times</small>
 				</div>
-				
 				<div class="form-group">
 					<label for="description">Desciption</label>
-					<textarea class="form-control" rows="3" name="comment" name="description" placeholder="Describe your campaign" required></textarea>
+					<textarea class="form-control" rows="3" name="campaign[description]" placeholder="Describe your campaign" required></textarea>
+					<small id="descriptionTip" class="form-text text-muted">Please freely describe your campaign</small>
 				</div>
+				<div class="form-group">
+						<label for="reward">Reward</label>
+						<input type="text" class="form-control" name="campaign[reward]" placeholder="Reward for campaign" required>
+						<small id="rewardTip" class="form-text text-muted">Please enter the name of the reward concisely</small>
+					</div>
 				<div class="row">
 					<div class="form-group col">
-						<label for="reward">Reward</label>
-						<input type="text" class="form-control" name="reward" placeholder="Reward for campaign" required>
+						<label for="stamps">Stamps needed</label>
+						<input type="number" class="form-control" name="campaign[stamps_needed]" placeholder="How many needed" required>
+						<small id="stampsNeededTip" class="form-text text-muted">
+						Upon collecting this many stamps, the customer may redeem them for a reward. Tip: Try an even number not too far from 10.
+						</small>
 					</div>
 					<div class="form-group col">
-						<label for="stamps">Stamps needed</label>
-						<input type="number" class="form-control" name="stamps" placeholder="How many needed" required>
+						<label for="stamps">Stamp get frequency</label>
+						<input type="number" class="form-control" name="campaign[stamp_get_frequency]" placeholder="How many minutes per stamp" required>
+						<small id="getFrequencyTip" class="form-text text-muted">
+						A customer is allowed to get a stamp once every this many minutes. Tip: 1 or 60
+						</small>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="image">Image</label>
-					<input type="text" class="form-control" name="image" placeholder="insert image url">
+					<input type="text" class="form-control" name="campaign[image]" placeholder="insert image url">
+					<small id="imageUrlTip" class="form-text text-muted">Right-click an image online to copy its image address. (You cannot upload an image on this platform) Tip: Consider using a FaceBook or Twitter profile image
+					</small>
 				</div>
 				<div class="row">
 					<div class="form-group col">
 						<label for="start">Starting date</label>
-						<input type="date" class="form-control" name="start" placeholder="Enter starting date" required>
+						<input type="date" class="form-control" name="campaign[start_time]" placeholder="Enter starting date" required>
+
 					</div>
 					<div class="form-group col">
 						<label for="end">Ending date</label>
-						<input type="date" class="form-control" name="end" placeholder="Enter ending date" required>
+						<input type="date" class="form-control" name="campaign[end_time]" placeholder="Enter ending date" required>
 					</div>
 				</div>
+				<small id="timeTip" class="form-text text-muted">Customers are allowed to perform actions such as getting stamps and redeeming them only between the starting and ending dates of the campaign.</small>
+				<br>
 				<input type="submit" class="btn btn-primary" value="Deploy">
 			</form>
-			<br>
 		</div>
 	</div>
 <!--

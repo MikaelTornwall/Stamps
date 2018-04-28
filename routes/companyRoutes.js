@@ -41,18 +41,13 @@ router.get("/admin/:campaigntitle", middleware.isAuthenticatedCompany, function(
 	});
 });
 
+/*
+Publish a new campaign
+*/
 router.post("/admin/campaigns", middleware.isAuthenticatedCompany, middleware.campaignNameAvailable, function(req,res){
-	var campaign = {
-		title: req.body.title,
-		image: req.body.image,
-		start_time: req.body.start,
-		end_time: req.body.end,
-		description: req.body.description,
-		reward: req.body.reward,
-		stamps_needed: req.body.stamps,
-		company: req.user.username,
-		identifiers: []
-	};
+	var campaign = req.body.campaign;
+	campaign["company"] = req.user.username;
+	campaign["identifiers"] = [];
 	Campaign.create(campaign, function(err, newCampaign) {
 		if(err) {
 			console.log("Campaign creation failed");

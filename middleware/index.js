@@ -53,6 +53,7 @@ middlewareObj.campaignExists = function(req, res, next) {
 				res.redirect("/campaigns");
 			} else {
 				console.log("campaigns retreived");
+				res.locals.campaign = foundCampaign[0];
 				return next();
 			}
 		}
@@ -109,7 +110,9 @@ middlewareObj.checkStampGetValidity = function(req, res, next) {
 		} else {
 			//If the last stamp gotten (in the array at index .length - 1) has 
 			if(foundStamps && foundStamps.length) {
-				if(foundStamps[foundStamps.length - 1].requesting_time < Date.now() - 5000) {
+				var timeDifference = Date.now() - foundStamps[foundStamps.length - 1].requesting_time;
+				var allowed_frequency = res.locals.campaign.stamp_get_frequency * 60000 || 5000;
+				if(timeDifference > allowed_frequency) {
 					console.log("A minute has passed since the last stamp get");
 					return next();
 				} else {

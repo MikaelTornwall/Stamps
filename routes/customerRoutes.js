@@ -7,12 +7,9 @@ var Stamp = require("../models/stamp");
 var middleware = require("../middleware/index.js");
 
 
-//========================================================
-//BASIC ROUTES 
-//========================================================
-
-
-
+/*
+Unnecessary profile page disabled
+*/
 router.get("/customer", middleware.isAuthenticatedCustomer, function(req,res){
 	var DISABLED = true;
 	if(DISABLED) {
@@ -50,6 +47,9 @@ router.get("/customer/recent", middleware.isAuthenticatedCustomer, middleware.st
 	});
 });
 
+/*
+The main view for customers. Gets the relevant stamps and draws them on a card template
+*/
 router.get("/customer/:campaign", middleware.isAuthenticatedCustomer, function(req,res){
 	Campaign.find({title:req.params.campaign}, function(err, foundCampaign) {
 		if(err) {
@@ -75,6 +75,11 @@ router.get("/customer/:campaign", middleware.isAuthenticatedCustomer, function(r
 	});
 });
 
+/*
+Trying different indentation.
+Redeems stamps as per instructions and takes you to the main stamp card view
+*/
+
 router.get("/customer/:campaign/redeem",
 middleware.isAuthenticatedCustomer,
 middleware.campaignExists,
@@ -94,20 +99,23 @@ function(req,res){
 		} else {
 			console.log("campaigns retreived");
 			for(var i = 0; i < foundCampaign[0].stamps_needed; i++) {
-				Stamp.update({holder:req.user.username, campaign:req.params.campaign, granting_time:null}, {$set: {granting_time:Date.now()}}, function(err, foundStamps) {
+				Stamp.update({holder:req.user.username, campaign:req.params.campaign, granting_time:null}, 
+					{
+						$set: {
+							granting_time:Date.now()
+						}
+					}, function(err, foundStamps) {
 					if(err) {
-						req.flash("error", "Failed to redeem stamps");
+						console.log("Failed to redeem a stamp");
 					} else {
-						req.flash("success", "Stamps redeemed. Collect your reward!");
+						console.log("A stamp redeemed");
 					}
-					
 				});
 			}
+			req.flash("success", "Stamps are redeemed, please collect your reward!");
 			res.redirect("/customer/" + req.params.campaign);
 		}
 	});
 });
-
-
 
 module.exports = router;

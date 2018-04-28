@@ -10,12 +10,13 @@
 			<span class="img-container">
 				<img src="<%= campaign[0].image %>" height="200" width="250">
 			</span>
-			<p><strong>Started by:</strong> <%= campaign[0].company.username%></p>
+			<p><strong>Started by:</strong> <%= campaign[0].company %></p>
 			<p><strong>Description:</strong> <%= campaign[0].description %></p>
 			<p><strong>Start:</strong> <%= campaign[0].start_time %></p>
 			<p><strong>End:</strong> <%= campaign[0].end_time %></p>
 			<p><strong>Reward:</strong> <%= campaign[0].reward %></p>
 			<p><strong>Stamps needed:</strong> <%= campaign[0].stamps_needed %></p>
+			<p><strong>Stamps per minute allowed: </strong> <%= campaign[0].stamp_get_frequency %></p>
 			
 			<p><strong>Identifiers:</strong></p>
 			<ol>
