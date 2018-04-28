@@ -6,6 +6,7 @@ var campaignSchema = new mongoose.Schema({
 	start_time: Date,
 	end_time: Date,
 	stamps_needed: Number,
+	stamp_get_frequency: Number,
 	description: String,
 	reward: String,
 	company: String,
