@@ -128,6 +128,7 @@ middlewareObj.checkStampGetValidity = function(req, res, next) {
 	});
 }
 
+//old code. switch to using res.locals.campaign from campaignExists
 middlewareObj.campaignIsActive = function(req, res, next) {
 	Campaign.findOne({title:req.params.campaign}, function(err, foundCampaign) {
 		if(err) {
@@ -160,34 +161,84 @@ middlewareObj.campaignIsActive = function(req, res, next) {
 	});
 }
 
-middlewareObj.redemptionValid = function(req, res, next) {
-	Campaign.find({title:req.params.campaign}, function(err, foundCampaign) {
+//works
+middlewareObj.eligibleForRedemption = function(req, res, next) {
+	Stamp.find({holder:req.user.username, campaign:req.params.campaign, granting_time:null}, function(err, foundStamps) {
 		if(err) {
-			console.log("error retreiving campaign");
-			req.flash("error", "Error finding the campaign");
-			res.redirect("/campaigns");
-		} else if(!foundCampaign.length) {
-			console.log("no campaigns found");
-			req.flash("error", "Campaign not found");
-			res.redirect("/campaigns")
+			req.flash("error", "Not redeemable");
+			console.log("not redeemable");
+			res.redirect("/customer/" + req.params.campaign);
 		} else {
-			console.log("campaigns retreived");
-			Stamp.find({holder:req.user.username, campaign:req.params.campaign, granting_time:null}, function(err, foundStamps) {
-				if(err) {
-					req.flash("error", "Not redeemable");
-					console.log("not redeemable");
-					res.redirect("/customer/" + req.params.campaign);
-				} else {
-					if(foundStamps.length >= foundCampaign[0].stamps_needed) {
-						return next();
-					}
-				}
-			});
+			if(foundStamps.length >= res.locals.campaign.stamps_needed) {
+				res.redirect("/customer/" + res.locals.campaign.title + "/redeem");
+			} else {
+				return next();
+			}
 		}
 	});
 }
 
+//works
+middlewareObj.redemptionValid = function(req, res, next) {
+	Stamp.find({holder:req.user.username, campaign:req.params.campaign, granting_time:null}, function(err, foundStamps) {
+		if(err) {
+			req.flash("error", "Not redeemable");
+			console.log("not redeemable");
+			res.redirect("/customer/" + req.params.campaign);
+		} else {
+			if(foundStamps.length >= res.locals.campaign.stamps_needed) {
+				return next();
+			} else {
+				res.redirect("/customer/" + req.params.campaign);
+			}
+		}
+	});
+}
 
+//definitely broken
+middlewareObj.isCustomerEntitled = function(req, res, next) {
+	Stamp.find({holder:req.user.username, campaign:req.params.campaign, granting_time:{$ne:null}}, function(err, foundStamps) {
+		if(err) {
+			console.log("error figuring out entitlement");
+			res.redirect("/customer/" + req.params.campaign);
+		} else {
+			if(foundStamps.length) {
+				var timeDifference = Date.now() - foundStamps[foundStamps.length - 1].granting_time;
+				var allowedDuration = 1000 * 60 * 15;
+				if(timeDifference < allowedDuration) {
+					return next();
+				} else {
+					res.redirect("/customer/" + req.params.campaign);
+				}
+			} else {
+				res.redirect("/customer/" + req.params.campaign);
+			}
+		}
+	});
+}
+
+//probably broken too
+middlewareObj.redirectToRewardIfEntitled = function(req, res, next) {
+	Stamp.find({holder:req.user.username, campaign:req.params.campaign, granting_time:{$ne:null}}, function(err, foundStamps) {
+		if(err) {
+			console.log("error figuring out entitlement");
+			return next();
+		} else {
+			if(foundStamps.length) {
+				var timeDifference = Date.now() - foundStamps[foundStamps.length - 1].granting_time;
+				var allowedDuration = 1000 * 60 * 15;
+				if(timeDifference < allowedDuration) {
+					req.flash = ("success", "You are entitled to the reward");
+					res.redirect("/customer/" + req.params.campaign + "/eligible");
+				} else {
+					return next();
+				}
+			} else {
+				return next();
+			}
+		}
+	});
+}
 
 middlewareObj.stickyFlash = function(req, res, next) {
 	console.log(res.locals);

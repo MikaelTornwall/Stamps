@@ -63,7 +63,8 @@ router.get("/stamp/:company/:campaign/:identifier",
 	middleware.companyExists,
 	middleware.campaignExists,
 	middleware.campaignIsActive,
-	middleware.checkStampGetValidity, 
+	middleware.checkStampGetValidity,
+	middleware.eligibleForRedemption, 
 	function(req,res) {
 	var stamp = {
 		id: 1,

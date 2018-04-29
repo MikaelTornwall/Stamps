@@ -50,7 +50,10 @@ router.get("/customer/recent", middleware.isAuthenticatedCustomer, middleware.st
 /*
 The main view for customers. Gets the relevant stamps and draws them on a card template
 */
-router.get("/customer/:campaign", middleware.isAuthenticatedCustomer, function(req,res){
+router.get("/customer/:campaign", 
+middleware.isAuthenticatedCustomer, 
+middleware.redirectToRewardIfEntitled,
+function(req,res){
 	Campaign.find({title:req.params.campaign}, function(err, foundCampaign) {
 		if(err) {
 			console.log("error retreiving campaign");
@@ -79,7 +82,7 @@ router.get("/customer/:campaign", middleware.isAuthenticatedCustomer, function(r
 Trying different indentation.
 Redeems stamps as per instructions and takes you to the main stamp card view
 */
-
+//using old code, switch to using res.locals.campaign instead of retreiving from server
 router.get("/customer/:campaign/redeem",
 middleware.isAuthenticatedCustomer,
 middleware.campaignExists,
@@ -116,6 +119,13 @@ function(req,res){
 			res.redirect("/customer/" + req.params.campaign);
 		}
 	});
+});
+
+router.get("/customer/:campaign/eligible", 
+middleware.isAuthenticatedCustomer, 
+middleware.isCustomerEntitled, 
+function(req, res) {
+	res.render("partials/coffeereward");
 });
 
 module.exports = router;

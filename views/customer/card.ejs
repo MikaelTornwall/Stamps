@@ -28,10 +28,13 @@
 				</table>
 			</div>
 			<br>
+
 			<div class="row d-flex justify-content-center">
 				<div class="col-sm-6">
 					<% if(campaign[0].stamps_needed <= stamps.length) { %>
-						<a href="/customer/<%=campaign[0].title%>/redeem" class="btn">Get your free coffee</a>
+						<!--<a href="/customer/<%= //campaign[0].title %>/redeem" class="btn">Get your free coffee</a>-->
+						<!-- Looks kind of nice on mobile, but like crap on computer -->
+						<p>Congratulations, your stamp card is full! Your next scan redeems the coupon.</p>
 					<% } %>
 				</div>
 			</div>
@@ -52,4 +55,7 @@
 -->
 </div>
 <br>
+
+<% //include ../partials/coffeereward %>
+
 <% include ../partials/footer %>
