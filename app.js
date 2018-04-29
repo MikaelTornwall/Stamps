@@ -9,7 +9,7 @@ var bodyParser 				= require("body-parser"),
 	app						= express();
 
 app.use(require("express-session")({
-	secret: "SECRETSTRING",
+	secret: process.env.SECRET || "SECRETSTRING",
 	resave: false,
 	saveUninitialized: false
 }));
@@ -21,7 +21,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-
 
 var url = process.env.DATABASEURL || "mongodb://localhost/stamps";
 mongoose.connect(url);
