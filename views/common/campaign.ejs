@@ -10,13 +10,14 @@
 			<span class="img-container">
 				<img src="<%= campaign[0].image %>" height="200" width="250">
 			</span>
+			<br>
 			<p><strong>Started by:</strong> <%= campaign[0].company.username%></p>
 			<p><strong>Description:</strong> <%= campaign[0].description %></p>
 			<p><strong>Start:</strong> <%= campaign[0].start_time %></p>
 			<p><strong>End:</strong> <%= campaign[0].end_time %></p>
 			<p><strong>Reward:</strong> <%= campaign[0].reward %></p>
 			<p><strong>Stamps needed:</strong> <%= campaign[0].stamps_needed %></p>
-			<a href="/customer/<%= campaign[0].title %>" type="submit" class="btn btn-primary" form="show_card">Show</a>
+			<button type="submit" class="btn btn-primary" form="show_card"><a href="/customer/<%= campaign[0].title %>">Show</a></button>
 		</div>
 	</div>
 	<!--

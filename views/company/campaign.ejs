@@ -17,7 +17,7 @@
 			<p><strong>Reward:</strong> <%= campaign[0].reward %></p>
 			<p><strong>Stamps needed:</strong> <%= campaign[0].stamps_needed %></p>
 			<p><strong>Stamps per minute allowed: </strong> <%= campaign[0].stamp_get_frequency %></p>
-			
+
 			<p><strong>Identifiers:</strong></p>
 			<ol>
 				<% for(var i = 0; i < campaign[0].identifiers.length; i++) { %>
@@ -30,12 +30,12 @@
 			<form class="form-inline" action="/admin/campaigns/<%= campaign[0].title %>/?_method=PUT" method="post">
 				<div class="form-group">
 					<input type="text" class="form-control" name="identifier" placeholder="Input identifier">
-					<input type="submit" class="form-control" value="Add">
+					<input class="btn m-2" type="submit" class="form-control" value="Add">
 				</div>
 			</form>
 		</div>
 	</div>
-	
+
 	<div class="col-sm-6">
 		<% for(var i = 0; i < campaign[0].identifiers.length; i++) { %>
 			<div class="card p-3">

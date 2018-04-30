@@ -12,6 +12,9 @@ html {
 
 body {
   font-family: 'Open Sans', sans-serif !important;
+  background: rgba(0, 95, 146, 1);
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -45,7 +48,7 @@ ul {
 .btn:hover,
 .btn:active,
 .btn.focus {
-  background-color: rgba(106, 165, 210, 1) !important;
+  background-color: rgba(0, 95, 146, .8) !important;
 }
 
 .card {
@@ -101,7 +104,7 @@ footer {
 
 .contact-info {
   color: rgba(106, 165, 210, 1);
-  margin: 1rem 0 2rem 0;
+  margin: 1.5rem 0 2rem 0;
 }
 
 .icon {
@@ -116,6 +119,31 @@ footer {
   color: rgba(255, 255, 255, 1);
 }
 
+.logo {
+    display: block;
+    margin: .6rem;
+    cursor: pointer;
+}
+
+a.circularmay-logo {
+  font-family: 'Luna', cursive;
+  font-size: .5rem;
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+a.circularmay-logo:hover {
+  color: rgba(106, 165, 210, 1) !important;
+}
+
+.niimaar-logo {
+  display: block;
+}
+
+.now-logo {
+  margin: 1rem;
+  display: block;
+}
+
 .copyright {
   color: rgba(106, 165, 210, 1);
 }
@@ -123,8 +151,8 @@ footer {
 /* COMMON */
 /* Campaign */
 /* Campaigns */
-.campaigns {
-  height: 100vh;
+.campaign-container {
+  padding-bottom: 3em;
 }
 
 .campaign-heading {
@@ -140,7 +168,11 @@ footer {
   height: 200px;
   width: 250px;
   /* Has to be kept same as image dimensions */
-  background-color: rgba(36, 31, 32, .5);
+  background-color: rgba(106, 165, 210, .5);
+}
+
+.campaign-title:hover {
+  background-color: rgba(0, 95, 146, .5);
 }
 
 .campaign-bg {
@@ -180,8 +212,6 @@ a.login {
 .login-style {
   color: rgba(255, 255, 255, 1);
 }
-
-.not-registered{}
 
 /* Register */
 .register-heading {
@@ -235,4 +265,112 @@ a.login {
 .stamping-title {
   font-family: 'Luna', cursive;
   text-align: center;
+}
+
+/* ANIMATION */
+
+#cup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+/* For the coffee */
+#cup:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 30px;
+  width: 100%;
+  border-radius: 50%;
+  background: #421300;
+  border: solid 7px #FFF;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+  box-shadow: 0 0 15px rgba(0, 0, 0, .5);
+}
+
+#cup:after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  right: -45%;
+  height: 90px;
+  width: 100px;
+  border-radius: 100%;
+  background: transparent;
+  border: solid 13px #FFF;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+}
+
+#plate {
+  width: 250px;
+  height: 30px;
+  border-bottom-left-radius: 40%;
+  border-bottom-right-radius: 40%;
+  background: #FFF;
+  position: absolute;
+  top: 162px;
+  transform: translateX(-50px);
+  box-shadow: 4px 4px 10px (0, 0, 0, 0.5);
+}
+
+ul.anim {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -50px;
+  transform: translateX(10%);
+  width: 100%;
+}
+
+ul li.anim {
+  list-style-type: none;
+  width: 2px;
+  height: 40px;
+  background: #FFF;
+  float: left;
+  margin: 10px;
+  animation: hotwaves 2s linear infinite;
+}
+
+@keyframes hotwaves {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(-80px);
+    opacity: 0;
+    filter: blur(5px);
+  }
+}
+
+ul li:nth-child(1) {
+  animation-delay: .2s;
+}
+
+ul li:nth-child(2) {
+  animation-delay: .6s;
+}
+
+ul li:nth-child(3) {
+  animation-delay: .1s;
+}
+
+ul li:nth-child(4) {
+  animation-delay: .4s;
+}
+
+ul li:nth-child(5) {
+  animation-delay: .5s;
 }

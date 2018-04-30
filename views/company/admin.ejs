@@ -3,16 +3,16 @@
 <br>
 <div class="row">
 	<div class="col-sm-3">
-		<div class="list-group card p-3">
+		<div class="list-group stamp-card p-3 mb-3">
 			<h2>Campaigns</h2>
-			<ul>
+			<ul class="mt-2">
 				<% for(var i = 0; i < campaigns.length; i++) { %>
 				<a href="/admin/<%= campaigns[i].title %>" class="list-group-item"><%= campaigns[i].title %></a>
 				<% } %>
 			</ul>
 		</div>
 	</div>
-	
+
 	<div class="col-sm-6">
 		<div class="card p-3">
 			<h2>New campaign</h2>
@@ -84,5 +84,3 @@
 -->
 </div>
 <% include ../partials/footer %>
-
-
