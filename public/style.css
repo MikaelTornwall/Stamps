@@ -271,7 +271,7 @@ a.login {
 
 #cup {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 150px;
@@ -373,4 +373,25 @@ ul li:nth-child(4) {
 
 ul li:nth-child(5) {
   animation-delay: .5s;
+}
+
+.reward-text {
+  font-family:'Luna', cursive;
+  font-size: 1.5rem;
+  text-align:center;
+  color: white;
+}
+
+.reward-text.above {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.reward-text.below {
+  position: absolute;
+  top: 77%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
