@@ -7,6 +7,7 @@
 
 html {
   font-size: 16px;
+  background: rgba(0, 95, 146, 1);
   height: 100vh;
 }
 
@@ -240,6 +241,9 @@ a.login {
 /* CUSTOMER */
 /* Cards */
 .stamp-card {
+}
+
+.stamp-card {
   background: linear-gradient(#6AA5D2A1, #3FBFBFA1, #005F92A1, #6AA5D2A1, #3FBFBFA1);
   box-shadow: 0 3px 5px rgba(36, 31, 32, .3);
 }
@@ -268,7 +272,7 @@ a.login {
 }
 
 /* ANIMATION */
-
+/* The styling is written on coffeereward
 #cup {
   position: absolute;
   top: 40%;
@@ -281,7 +285,6 @@ a.login {
   border-bottom-right-radius: 20px;
 }
 
-/* For the coffee */
 #cup:before {
   content: "";
   position: absolute;
@@ -375,8 +378,11 @@ ul li:nth-child(5) {
   animation-delay: .5s;
 }
 
+.reward {
+  height: 100vh;
+}
 .reward-text {
-  font-family:'Luna', cursive;
+  font-family: 'Luna', cursive;
   font-size: 1.5rem;
   text-align:center;
   color: white;
@@ -395,3 +401,4 @@ ul li:nth-child(5) {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+*/
