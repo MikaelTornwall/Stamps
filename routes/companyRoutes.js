@@ -9,7 +9,13 @@ var middleware = require("../middleware/index.js");
 //========================================================
 //BASIC ROUTES 
 //========================================================
-
+var  getRelevantStamps = function(req, res, next) {
+	Stamp.find({campaign:req.params.campaigntitle}, function(err, foundStamps) {
+		req.flash("error", err);
+		res.locals.foundStamps = foundStamps;
+		return next();
+	});
+}
 
 //get company page by username
 router.get("/admin", middleware.isAuthenticatedCompany, function(req,res){
@@ -26,7 +32,7 @@ router.get("/admin", middleware.isAuthenticatedCompany, function(req,res){
 	
 });
 
-router.get("/admin/:campaigntitle", middleware.isAuthenticatedCompany, function(req,res){
+router.get("/admin/:campaigntitle", middleware.isAuthenticatedCompany, getRelevantStamps, function(req,res){
 	Campaign.find({title:req.params.campaigntitle}, function(err, foundCampaign) {
 	// Campaign.find({}, function(err, foundCampaigns) {
 		if(err) {
@@ -36,7 +42,7 @@ router.get("/admin/:campaigntitle", middleware.isAuthenticatedCompany, function(
 		} else {
 			console.log("campaigns retreived");
 			req.flash("success","found the campaign");
-			res.render("company/campaign", {user:req.user, campaign:foundCampaign});
+			res.render("company/campaign", {user:req.user, campaign:foundCampaign, stamps:res.locals.foundStamps});
 		}
 	});
 });

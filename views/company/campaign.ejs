@@ -37,6 +37,29 @@
 	</div>
 
 	<div class="col-sm-6">
+		<div class="card p-3">
+		<h2>Stamps collected</h2>
+		<br>
+			<table>
+				<tr>
+					<th>Holder</th>
+					<th>Requesting time</th>
+					<th>Granting time</th>
+					<th>Identifier</th>
+				</tr>
+				<% for(var i = 0; i < stamps.length; i++) { %>
+					<tr style="border:1px solid white;">
+						<td style="border:1px solid white"><%= stamps[i].holder %></td>
+						<td style="border:1px solid white"><%= stamps[i].requesting_time %></td>
+						<td style="border:1px solid white"><%= stamps[i].granting_time %></td>
+						<td style="border:1px solid white"><%= stamps[i].identifier %></td>
+					</tr>
+				<% } %>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-sm-3">
 		<% for(var i = 0; i < campaign[0].identifiers.length; i++) { %>
 			<div class="card p-3">
 				<p><%= campaign[0].identifiers[i] %></p>
