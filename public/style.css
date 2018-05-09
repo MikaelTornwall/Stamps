@@ -1,0 +1,407 @@
+/* DOM Native elements */
+
+@font-face {
+    font-family: 'Luna';
+    src: url('/fonts/Luna.ttf');
+}
+
+html {
+  font-size: 16px;
+  background: rgba(0, 95, 146, 1);
+  height: 100vh;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif !important;
+  background: rgba(0, 95, 146, 1);
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: rgba(106, 165, 210, 1) !important;
+  letter-spacing: 0.1rem;
+}
+
+a:hover,
+a:active {
+  color: rgba(255, 255, 255, 1) !important;
+  text-decoration: none !important;
+}
+
+/*a:visited {
+  color: rgba(110, 181, 192, 1) !important;
+}*/
+
+ul {
+  list-style: none;
+}
+
+/* COMMON */
+
+.btn {
+  background-color: rgba(0, 95, 146, 1) !important;
+  border: none !important;
+  color: rgba(255, 255, 255, 1) !important;
+  letter-spacing: 0.1rem;
+}
+
+.btn:hover,
+.btn:active,
+.btn.focus {
+  background-color: rgba(0, 95, 146, .8) !important;
+}
+
+.card {
+  background: rgba(36, 31, 32, .7) !important;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 3px rgba(36, 31, 32, .3);
+}
+
+/* *********************************************************************** */
+/* PARTIALS */
+/* Navigation bar */
+
+.stamping-logo {
+  font-family: 'Luna', cursive;
+  font-size: .7rem !important;
+}
+.container-fluid {
+  background-color: rgba(0, 95, 146, 0.2);
+  background-size: cover;
+  height: 100%;
+  color: rgba(255, 255, 255, 1);
+}
+
+.frame {
+  height: 100%;
+  background-image: url('/img/Sea_photo.jpeg');
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -99;
+}
+
+.navbar {
+  background-color: rgba(0, 95, 146, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.fa-bars {
+  color: rgba(106, 165, 210, 1);
+}
+
+.fa-bars:hover,
+.fa-bars:focus,
+.fa-bars:active {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* Footer */
+
+footer {
+  background-color: rgba(0, 95, 146, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.contact-info {
+  color: rgba(106, 165, 210, 1);
+  margin: 1.5rem 0 2rem 0;
+}
+
+.icon {
+  color: rgba(106, 165, 210, 1);
+  font-size: 2rem;
+  margin: .4rem;
+}
+
+.icon:hover,
+.icon:active,
+.icon:focus {
+  color: rgba(255, 255, 255, 1);
+}
+
+.logo {
+    display: block;
+    margin: .6rem;
+    cursor: pointer;
+}
+
+a.circularmay-logo {
+  font-family: 'Luna', cursive;
+  font-size: .5rem;
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+a.circularmay-logo:hover {
+  color: rgba(106, 165, 210, 1) !important;
+}
+
+.niimaar-logo {
+  display: block;
+}
+
+.now-logo {
+  margin: 1rem;
+  display: block;
+}
+
+.copyright {
+  color: rgba(106, 165, 210, 1);
+}
+/* *********************************************************************** */
+/* COMMON */
+/* Campaign */
+/* Campaigns */
+.campaign-container {
+  padding-bottom: 3em;
+}
+
+.campaign-heading {
+  text-align: center;
+}
+
+.campaign-title {
+  font-family: 'Luna', cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 200px;
+  width: 250px;
+  /* Has to be kept same as image dimensions */
+  background-color: rgba(106, 165, 210, .5);
+}
+
+.campaign-title:hover {
+  background-color: rgba(0, 95, 146, .5);
+}
+
+.campaign-bg {
+  background: rgba(36, 31, 32, .1);
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0 0 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 1px 3px rgba(36, 31, 32, .3);
+
+}
+
+a.view-link {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Index */
+.companies {
+  text-align: center;
+}
+
+.companies-style {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* Login */
+.login-heading {
+  text-align: center;
+  margin: 1.2rem 0;
+  letter-spacing: 0.2rem;
+}
+
+a.login {
+  color: rgba(255, 255, 255, 1);
+}
+
+.login-style {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* Register */
+.register-heading {
+  text-align: center;
+}
+
+.customer-signup {
+  padding: 3rem;
+  float: left;
+  display: block;
+}
+
+.company-signup {
+  padding: 3rem;
+  float: left;
+  display: block;
+}
+
+/* *********************************************************************** */
+/* COMPANY */
+/* Admin */
+/* Index */
+/* Profile */
+
+/* *********************************************************************** */
+/* CUSTOMER */
+/* Cards */
+.stamp-card {
+}
+
+.stamp-card {
+  background: linear-gradient(#6AA5D2A1, #3FBFBFA1, #005F92A1, #6AA5D2A1, #3FBFBFA1);
+  box-shadow: 0 3px 5px rgba(36, 31, 32, .3);
+}
+
+.stamp-position {
+  text-align: center;
+}
+
+.fa-coffee {
+  font-size: 2rem;
+  color: white;
+}
+
+/* Profile */
+/* Stampcard */
+
+/* PAGES */
+/* Stamping */
+.stamping {
+  color: rgba(255, 255, 255, 1);
+}
+
+.stamping-title {
+  font-family: 'Luna', cursive;
+  text-align: center;
+}
+
+/* ANIMATION */
+#cup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .5), inset 6px 0 10px rgba(0 , 0, 0, .3)
+}
+
+/* For the coffee */
+#cup:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 30px;
+  width: 100%;
+  border-radius: 50%;
+  background: #421300;
+  border: solid 3px #FFF;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+  box-shadow: 0 0 15px rgba(0, 0, 0, .5) ;
+}
+
+#cup:after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  right: -45%;
+  height: 90px;
+  width: 100px;
+  border-radius: 100%;
+  background: transparent;
+  border: solid 13px #FFF;
+  box-sizing: border-box;
+  transform: translateY(-50%);
+  z-index: -100;
+}
+
+#plate {
+  width: 250px;
+  height: 30px;
+  border-bottom-left-radius: 40%;
+  border-bottom-right-radius: 40%;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  background: #FFF;
+  position: absolute;
+  top: 155px;
+  transform: translateX(-50px);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, .5), inset 2px -5px 15px rgba(0, 0, 0, .3);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -50px;
+  transform: translateX(10%);
+  width: 100%;
+}
+
+ul li {
+  list-style-type: none;
+  width: 2px;
+  height: 40px;
+  background: #FFF;
+  float: left;
+  margin: 10px;
+  animation: hotwaves 2s linear infinite;
+}
+
+@keyframes hotwaves {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(2px);
+  }
+  100% {
+    transform: translateY(-80px);
+    opacity: 0;
+    filter: blur(5px);
+  }
+}
+
+ul li:nth-child(1) {
+  animation-delay: .2s;
+}
+
+ul li:nth-child(2) {
+  animation-delay: .6s;
+}
+
+ul li:nth-child(3) {
+  animation-delay: .4s;
+}
+
+ul li:nth-child(4) {
+  animation-delay: .1s;
+}
+
+ul li:nth-child(5) {
+  animation-delay: .5s;
+}
+
+.reward {
+  height: 100vh;
+}
+.reward-text {
+  font-family: 'Luna', cursive;
+  font-size: .9rem;
+  text-align:center;
+  color: white;
+}
+
+.reward-text.above {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.reward-text.below {
+  position: absolute;
+  top: 88%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

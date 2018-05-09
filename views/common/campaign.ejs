@@ -1,15 +1,32 @@
 <% include ../partials/header %>
 
-<h1><%= campaign.title %></h1>
-<img src="<%= campaign.image %>" width="200px" height="200px">
-<form action="/campaigns/<%= campaign.id %>" id="get_card_form" method="POST"></form>
-<p>
-Description: <%= campaign.description %> | 
-Start: <%= campaign.start_time %> | 
-End: <%= campaign.end_time %> | 
-Reward: <%= campaign.reward %> |
-Stamps needed: <%= campaign.stamps_needed %> | 
-<input type="submit" class="btn btn-primary" form="get_card_form" value="Get Card">
-</p>
+<div class="row">
+	<div class="col-sm-3"></div>
+	<div class="col-sm-6 pt-5">
+		<div class="card p-3">
+			<p class="campaign-title">
+				<strong><%= campaign[0].title %></strong>
+			</p>
+			<span class="img-container">
+				<img src="<%= campaign[0].image %>" height="200" width="250">
+			</span>
+			<br>
+			<p><strong>Started by:</strong> <%= campaign[0].company.username%></p>
+			<p><strong>Description:</strong> <%= campaign[0].description %></p>
+			<p><strong>Start:</strong> <%= campaign[0].start_time %></p>
+			<p><strong>End:</strong> <%= campaign[0].end_time %></p>
+			<p><strong>Reward:</strong> <%= campaign[0].reward %></p>
+			<p><strong>Stamps needed:</strong> <%= campaign[0].stamps_needed %></p>
+			<button type="submit" class="btn btn-primary" form="show_card"><a href="/customer/<%= campaign[0].title %>">Show</a></button>
+		</div>
+	</div>
+	<!--
+	<div class="col-sm-3">
+		<div class="card p-3">
+			<p>campaign object for debugging: <%= //campaign %></p>
+		</div>
+	</div>
+	-->
+</div>
 
 <% include ../partials/footer %>

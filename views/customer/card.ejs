@@ -1,41 +1,63 @@
 <% include ../partials/header %>
 
-<form action="/customers/<%= user._id %>/cards/<%= card._id %>" id="request_stamp_form" method="POST"></form>
-
-<h1>My Stamp card: <%= card %></h1>
-<p>#<%= card.campaign.title %></p>
-
-
-<!-- TÄMÄN SAA JA PITÄÄKIN KORVATA OMALLA TOTEUTUKSELLA. -->
-			<table style="border: 1px solid black; border-collapse: collapse;">
-				<% for(var i = 0; i < card.stamps_needed; i++) { %>
-					<% if((i % 2) === 0) { %>
-					<tr>
-						<td style="border: 1px solid black;  width:100px; height:100px;">
-						<% if(i < card.stamps.length) { %>
-							x
+<form action="/customer/<%=campaign[0].title%>/redeem?_method=PUT" method="POST" name="Redeem_form"></form>
+<div class="stamp-page">
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4 stamp-position">
+		<div class="stamp-card p-4">
+			<h3 class="stamping-logo">#<%= campaign[0].title %></h3>
+			<div class="d-flex justify-content-center">
+				<table style="border: 3px solid white; border-collapse: collapse;">
+					<% for(var i = 0; i < campaign[0].stamps_needed; i++) { %>
+						<% if((i % 2) === 0) { %>
+						<tr>
+							<td class="stamp-position" style="border: 3px solid white;  width:100px; height:100px;">
+							<% if(i < stamps.length) { %>
+								<i class="fas fa-coffee"></i>
+							<% } %>
+							</td>
+						<% } else { %>
+							<td class="stamp-position" style="border: 3px solid white;  width:100px; height:100px;">
+							<% if(i < stamps.length) { %>
+								<i class="fas fa-coffee"></i>
+							<% } %>
+							</td>
+						</tr>
 						<% } %>
-						</td>
-					<% } else { %>
-						<td style="border: 1px solid black;  width:100px; height:100px;">
-						<% if(i < card.stamps.length) { %>
-							x
-						<% } %>
-						</td>
-					</tr>
 					<% } %>
-				<% } %>
-			</table>
+				</table>
+			</div>
+			<br>
 
+			<div class="row d-flex justify-content-center">
+				<div class="col-sm-6">
+					<% if(campaign[0].stamps_needed <= stamps.length) { %>
+						<!--<a href="/customer/<%= //campaign[0].title %>/redeem" class="btn">Get your free coffee</a>-->
+						<!-- Looks kind of nice on mobile, but like crap on computer -->
+						<p>Congratulations, your stamp card is full! Your next scan redeems the coupon.</p>
+					<% } %>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--
+	<div class="col-sm-3">
+		<div class="card p-3">
+			<p>user object for debugging: <%= //user %></p>
+		</div>
+		<div class="card p-3">
+			<p>campaign object for debugging: <%= //campaign %></p>
+		</div>
+		<div class="card p-3">
+			<p>stamps object for debugging: <%= //stamps %></p>
+		</div>
+	</div>
+-->
+</div>
+</div>
+<br>
 
-
-<p>
-<input type="submit" class="btn btn-primary" form="request_stamp_form" value="Request Stamp"> | 
-<button>Redeem reward NOT IMPLEMENTED</button>
-</p>
-
-
-
-
+<% //include ../partials/coffeereward %>
 
 <% include ../partials/footer %>

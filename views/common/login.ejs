@@ -1,52 +1,31 @@
 <% include ../partials/header %>
-
+<br>
+<h2 class="stamping-title">Stamping</h2>
 <br>
 <br>
-
-<<<<<<< HEAD
-<h2 class="login-heading">Login</h2>
-<div class="login">
-	<span class="customer-login">
-=======
->>>>>>> master
-<form action="/login/customer" method="post">
-	<div class="form-group">
-		<label for="#">Customer login</label>
-		<br>
-		<label for="username">Username</label>
-		<input type="text" class="form-control" name="username" placeholder="Username">
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4">
+		<div class="card p-3 login-style">
+			<h2 class="login-heading">Login</h2>
+			<div class="login">
+				<span>
+					<form action="/login/customer" method="post">
+						<div class="form-group">
+							<label for="username">Username</label>
+							<input type="text" class="form-control" name="username" placeholder="username">
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" class="form-control" name="password" placeholder="password">
+						</div>
+						<input type="submit" class="btn btn-primary" value="Log in">
+					</form>
+				<p class="mt-4 register-heading">Not registered? <a href="/register">Sign up here!</a> </p>
+				</span>
+			</div>
+		</div>
 	</div>
-	<div class="form-group">
-		<label for="password">Password</label>
-		<input type="text" class="form-control" name="password" placeholder="Password">
-	</div>
-	<input type="submit" class="btn" value="Log in">
-</form>
-<<<<<<< HEAD
-</span>
-
-<span class="company-login">
-<form action="/login/company" method="post">
-	<div class="form-group">
-		<label for="#">Company login</label>
-		<br>
-		<label for="username">Username</label>
-		<input type="text" class="form-control" name="username" placeholder="Username">
-	</div>
-	<div class="form-group">
-		<label for="password">Password</label>
-		<input type="text" class="form-control" name="password" placeholder="Password">
-	</div>
-	<input type="submit" class="btn" value="Log In">
-</form>
-</span>
-
 </div>
-=======
-<p>Not registered? <a href="/register">Sign Up Here</a></p>
-<br>
-<br>
-
->>>>>>> master
 
 <% include ../partials/footer %>

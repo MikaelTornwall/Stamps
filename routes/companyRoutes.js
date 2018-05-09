@@ -2,142 +2,82 @@ var express = require("express");
 var router = express.Router();
 
 var User = require("../models/user");
-var Card = require("../models/card");
 var Stamp = require("../models/stamp");
 var Campaign = require("../models/campaign");
-var Reward = require("../models/reward");
-
-//========================================================
-//MIDDLEWARE
-//========================================================
-function isAuthenticatedCompany(req,res,next) {
-	if(req.isAuthenticated() && !req.user.role) {
-		return next();
-	}
-	res.redirect("/login");
-}
-
-router.use(function(req, res, next){
-	res.locals.currentUser = req.user;
-	next();
-});
-
+var middleware = require("../middleware/index.js");
 
 //========================================================
 //BASIC ROUTES 
 //========================================================
 
 
-router.get("/companies/:id/admin", isAuthenticatedCompany, function(req,res){
-	res.render("company/admin", {user:req.user, id:req.params.id, campaigns:req.user.campaigns});
-});
-
-router.get("/companies/:id/admin/campaigns/:campaignid", isAuthenticatedCompany, function(req,res){
-	Campaign.findById(req.params.campaignid, function(err, foundCampaign) {
+//get company page by username
+router.get("/admin", middleware.isAuthenticatedCompany, function(req,res){
+	Campaign.find({company:req.user.username}, function(err, foundCampaigns) {
 		if(err) {
-			console.log("error reaching admin campaigns");
-			res.redirect("/companies/COMPANYNAME/admin");
+			console.log("error retreiving campaigns");
+			req.flash("error","error retreiving campaigns");
 		} else {
-			console.log("campaign found for admin page");
-			res.render("company/campaign", {user:req.user, id:req.params.id, campaign:foundCampaign});
-		}
-	});
-});
-
-router.put("/companies/:id/admin/campaigns/:campaignid/stamps/:stampid/", isAuthenticatedCompany, function(req,res){
-	Stamp.findById(req.params.stampid, function(err, foundStamp) {
-		if(err) {
-			console.log("STAMP NOT FOUND WHILE GRANTING STAMP");
-			res.redirect("/companies/"+req.params.id+"/admin/campaigns/"+req.params.campaignid);
-		} else {
-			// stamp = foundStamp;
-			if(foundStamp !== null) {
-				foundStamp.granting_time = Date.now();
-				foundStamp.save();
-				console.log("stamp given a granting_time");
-				Card.findByIdAndUpdate(foundStamp.card.id,
-					{
-						$addToSet: {
-							stamps: {
-								_id:foundStamp._id
-							}
-						}
-					}, function(err, foundCard) {if(err) {} else {}}
-				);
-			} else {
-				console.log("no stamp found, nothing updated");
-			}
-		}
-	});
-	//remove the stamp request from the requests array
-	Campaign.findById(req.params.campaignid, function(err, foundCampaign) {
-		if(err) {} else {
-			console.log("searching for request");
-			res.redirect("/companies/"+req.params.id+"/admin/campaigns/"+req.params.campaignid);
-			for(var i = 0; i < foundCampaign.requests.length; i++) {
-				if(foundCampaign.requests[i]._id == req.params.stampid) {
-					console.log("stamp found in campaign requests");
-					foundCampaign.requests.splice(i,1);;
-					foundCampaign.save();
-				}
-			}
-			res.render("company/campaign", {user:req.user, id:req.params.id, campaign:foundCampaign});
+			console.log("campaigns retreived");
+			req.flash("success","found the campaigns");
+			res.render("company/admin", {user:req.user, campaigns:foundCampaigns});
 		}
 	});
 	
-	
 });
 
-router.post("/rewards", isAuthenticatedCompany, function(req,res){
-	var reward = {
-		title: req.body.title,
-		image: req.body.image,
-		description: req.body.description,
-		company: {
-			id: req.user.id_,
-			name: req.user.username
-		}
-	};
-	Reward.create(reward, function(err, newReward) {
+router.get("/admin/:campaigntitle", middleware.isAuthenticatedCompany, function(req,res){
+	Campaign.find({title:req.params.campaigntitle}, function(err, foundCampaign) {
+	// Campaign.find({}, function(err, foundCampaigns) {
 		if(err) {
-			console.log("error creating reward");
-			res.redirect("/companies/COMPANYNAME/admin");
+			console.log("error retreiving campaign");
+			req.flash("error","error retreiving campaign");
+			res.redirect("/admin");
 		} else {
-			res.redirect("/rewards");
+			console.log("campaigns retreived");
+			req.flash("success","found the campaign");
+			res.render("company/campaign", {user:req.user, campaign:foundCampaign});
 		}
-	})
+	});
 });
 
-router.post("/campaigns", isAuthenticatedCompany, function(req,res){
-	var campaign = {
-		title: req.body.title,
-		image: req.body.image,
-		start_time: req.body.start,
-		end_time: req.body.end,
-		description: req.body.description,
-		reward: req.body.reward,
-		stamps_needed: req.body.stamps,
-		requests: []
-	};
+/*
+Publish a new campaign
+*/
+router.post("/admin/campaigns", middleware.isAuthenticatedCompany, middleware.campaignNameAvailable, function(req,res){
+	var campaign = req.body.campaign;
+	campaign["company"] = req.user.username;
+	campaign["identifiers"] = [];
 	Campaign.create(campaign, function(err, newCampaign) {
 		if(err) {
-			console.log("error creating reward");
+			console.log("Campaign creation failed");
+			req.flash("error", "Campaign creation failed");
 			res.redirect("/companies/COMPANYNAME/admin");
 		} else {
-			User.findByIdAndUpdate(req.user._id,
-				{
-					$addToSet: {
-						campaigns: {
-							_id:newCampaign._id,
-							title:newCampaign.title
-						}
-					}
-				},
-				function(err,updatedUser) {if(err) {} else {}}
-			);
-			res.redirect("/campaigns");
+			console.log("Campaign created");
+			req.flash("success", "Campaign successfully created");
+			res.redirect("/admin/" + newCampaign.title);
 		}
 	})
+});
+
+router.put("/admin/campaigns/:campaign", middleware.isAuthenticatedCompany, function (req, res) {
+	Campaign.findOneAndUpdate({title:req.params.campaign}, 
+		{
+			$addToSet: {
+				identifiers: req.body.identifier
+			}
+		}, function(err, updatedCampaign) {
+		if(err) {
+			console.log("Failed to add identifier to campaign");
+			req.flash("error", "Failed to add identifier to campaign");
+			res.redirect("/admin");
+		} else {
+			console.log("Identifier added");
+			req.flash("success", "Identifier added");
+			res.redirect("/admin/" + req.params.campaign);
+		}
+	});
 });
 
 module.exports = router;
